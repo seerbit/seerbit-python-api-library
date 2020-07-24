@@ -30,12 +30,12 @@ class MobileMoneyService(Service, IMobileMoneyService, IClientConstants):
 
     def authorize(self, mobile_money: dict):
         """ POST /api/v2/payments/initiates """
-        super(MobileMoneyService, self).requires_token = True
+        self.requires_token = True
         MobileMoneyValidator.is_valid_authorize(payload=mobile_money)
         self.response = self.post_request(IClientConstants.INITIATE_PAYMENT_ENDPOINT, mobile_money, self.token)
         return self.response
 
     def get_available_networks(self):
         """ POST /api/v2/networks """
-        super(MobileMoneyService, self).requires_token = True
+        self.requires_token = True
         return self.get_request(IClientConstants.AVAILABLE_NETWORKS_ENDPOINT, self.token)

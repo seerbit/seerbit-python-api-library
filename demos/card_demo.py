@@ -14,12 +14,14 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
+from random import randint
 from client import Client
 from config import Config
 from enums import EnvironmentEnum
 from seerbit import Seerbit
 from service.account_service import AccountService
 from service.authentication import Authentication
+from service.card_service import CardService
 
 client = Client()
 
@@ -40,43 +42,48 @@ def authenticate() -> str:
     return auth_service.get_token()
 
 
-def authorize(token_str: str):
-    """ account authorization """
-    print("================== start account authorization ==================")
-    account_payload = {
-        "publicKey": "public2key",
+def card_authorize(token_str: str):
+    """ Initiate Card Payment """
+    print("================== start card authorize ==================")
+    random_number = randint(0, 16777215)
+    payment_ref = str(hex(random_number))
+    card_payload = {
+        "publicKey": client.public_key,
         "amount": "100.00",
         "fee": "10",
-        "fullName": "John Doe",
-        "mobileNumber": "08037456590",
+        "fullName": "Peter Diei",
+        "mobileNumber": "08030540611",
         "currency": "NGN",
         "country": "NG",
-        "paymentReference": "UYTRE234566677RDFGFDDSS",
-        "email": "johndoe@gmail.com",
-        "productId": "Foods",
-        "productDescription": "Uba Account Transaction ",
+        "paymentReference": payment_ref,
+        "email": "okechukwu.diei2@gmail.com",
+        "productId": "product101",
+        "productDescription": "ONE WORLD",
         "clientAppCode": "kpp64",
-        "channelType": "BANK_ACCOUNT",
-        "redirectUrl": "https://checkout.seerbit.com",
+        "redirectUrl": "http://checkout-seerbit.surge.sh",
+        "paymentType": "CARD",
+        "scheduleId": "",
+        "channelType": "Mastercard",
         "deviceType": "Apple Laptop",
         "sourceIP": "127.0.0.1:3456",
-        "accountName": "John S Doe",
-        "accountNumber": "1234567890",
-        "bankCode": "033",
-        "bvn": "12345678901",
-        "dateOfBirth": "04011984",
+        "cardNumber": "2223000000000007",
+        "cvv": "100",
+        "expiryMonth": "05",
+        "expiryYear": "37",
+        "pin": "1234",
+        "type": "3DSECURE",
         "retry": "false",
-        "invoiceNumber": "1234567891abc123ac"
+        "invoiceNumber": "1234567890abc123ac"
     }
-    account_service = AccountService(client, token_str)
-    json_response = account_service.authorize(account_payload)
-    print("================== stop account authorization ==================")
+    card_service = CardService(client, token_str)
+    json_response = card_service.authorize(card_payload)
+    print("================== stop card authorize ==================")
     return json_response
 
 
 token = authenticate()
 
 if token:
-    print("account authorize response: " + str(authorize(token)))
+    print("card authorize response: " + str(card_authorize(token)))
 else:
     print("authentication failure")

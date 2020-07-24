@@ -33,7 +33,7 @@ class AccountService(Service, IAccountService, IClientConstants):
         AccountValidator.is_valid_authorize(payload=account_payload)
         self.requires_token = True
         client = self.client
-        account_payload.append("publicKey", client.public_key)
+        account_payload.update({"publicKey": client.public_key})
         response = self.post_request(IClientConstants.INITIATE_PAYMENT_ENDPOINT, account_payload, self.token)
         return response
 

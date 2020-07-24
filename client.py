@@ -70,7 +70,7 @@ class Client:
     @property
     def environment(self):
         env = ""
-        if self.config.get("environment") is None:
+        if self.config.get("environment") is not None:
             env = str(self.config.get("environment"))
         return env
 

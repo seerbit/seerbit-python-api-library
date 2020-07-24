@@ -30,7 +30,7 @@ class OrderService(Service, IOrderService, IClientConstants):
 
     def authorize(self, mobile_money: dict):
         """ POST /api/v2/payments/initiates """
-        super(OrderService, self).requires_token = True
+        self.requires_token = True
         MobileMoneyValidator.is_valid_authorize(payload=mobile_money)
         self.response = self.post_request(IClientConstants.ORDERS_ENDPOINT, mobile_money, self.token)
         return self.response

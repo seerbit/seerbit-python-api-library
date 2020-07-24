@@ -40,43 +40,22 @@ def authenticate() -> str:
     return auth_service.get_token()
 
 
-def authorize(token_str: str):
-    """ account authorization """
-    print("================== start account authorization ==================")
-    account_payload = {
-        "publicKey": "public2key",
-        "amount": "100.00",
-        "fee": "10",
-        "fullName": "John Doe",
-        "mobileNumber": "08037456590",
-        "currency": "NGN",
-        "country": "NG",
-        "paymentReference": "UYTRE234566677RDFGFDDSS",
-        "email": "johndoe@gmail.com",
-        "productId": "Foods",
-        "productDescription": "Uba Account Transaction ",
-        "clientAppCode": "kpp64",
-        "channelType": "BANK_ACCOUNT",
-        "redirectUrl": "https://checkout.seerbit.com",
-        "deviceType": "Apple Laptop",
-        "sourceIP": "127.0.0.1:3456",
-        "accountName": "John S Doe",
-        "accountNumber": "1234567890",
-        "bankCode": "033",
-        "bvn": "12345678901",
-        "dateOfBirth": "04011984",
-        "retry": "false",
-        "invoiceNumber": "1234567891abc123ac"
+def otp_validate(token_str: str):
+    """ 2FA authentication """
+    print("================== start otp validation ==================")
+    otp_payload = {
+        "linkingReference": "2399293JSNBJBSFSDFSDS",
+        "otp": "123456"
     }
     account_service = AccountService(client, token_str)
-    json_response = account_service.authorize(account_payload)
-    print("================== stop account authorization ==================")
+    json_response = account_service.validate(otp_payload)
+    print("================== stop otp validation ==================")
     return json_response
 
 
 token = authenticate()
 
 if token:
-    print("account authorize response: " + str(authorize(token)))
+    print("account validate response: " + str(otp_validate(token)))
 else:
     print("authentication failure")
