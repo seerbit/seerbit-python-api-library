@@ -14,6 +14,8 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
+from random import randint
+
 from client import Client
 from config import Config
 from enums import EnvironmentEnum
@@ -43,15 +45,17 @@ def authenticate() -> str:
 def authorize(token_str: str):
     """ account authorization """
     print("================== start account authorization ==================")
+    random_number = randint(0, 16777215)
+    payment_ref = str(hex(random_number))
     account_payload = {
-        "publicKey": "public2key",
+        "publicKey": client.public_key,
         "amount": "100.00",
         "fee": "10",
         "fullName": "John Doe",
         "mobileNumber": "08037456590",
         "currency": "NGN",
         "country": "NG",
-        "paymentReference": "UYTRE234566677RDFGFDDSS",
+        "paymentReference": payment_ref,
         "email": "johndoe@gmail.com",
         "productId": "Foods",
         "productDescription": "Uba Account Transaction ",
