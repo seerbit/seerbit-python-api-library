@@ -40,7 +40,7 @@ class HttpClient(IHttpClient, INumericConstants):
             response = post(url=request_url, json=params, headers=header)
         status_code = int(response.status_code)
         if status_code < self.HTTP_STATUS_200 or status_code > self.HTTP_STATUS_299:
-            SeerbitError.handle_exception(response)
+            SeerbitError.handle_error(response)
         return response.json()
 
     def put(self, service, request_url, params, token):
@@ -58,7 +58,7 @@ class HttpClient(IHttpClient, INumericConstants):
             response = put(url=request_url, json=params, headers=header)
         status_code = int(response.status_code)
         if status_code < self.HTTP_STATUS_200 or status_code > self.HTTP_STATUS_299:
-            SeerbitError.handle_exception(response)
+            SeerbitError.handle_error(response)
         return response.json()
 
     def get(self, service, request_url, token):
@@ -76,5 +76,5 @@ class HttpClient(IHttpClient, INumericConstants):
             response = get(url=request_url, headers=header)
         status_code = int(response.status_code)
         if status_code < self.HTTP_STATUS_200 or status_code > self.HTTP_STATUS_299:
-            SeerbitError.handle_exception(response)
+            SeerbitError.handle_error(response)
         return response.json()

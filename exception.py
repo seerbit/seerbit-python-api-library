@@ -26,7 +26,7 @@ class SeerbitError(RuntimeError):
         super(SeerbitError, self).__init__(message, code, status, timestamp)
 
     @staticmethod
-    def handle_exception(response):
+    def handle_error(response):
         json = response.json()
         if json['message'] and json['errorCode']:
             pass
