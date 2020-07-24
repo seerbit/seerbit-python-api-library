@@ -16,7 +16,7 @@
  """
 from interface.app_interface import IHttpClient, INumericConstants
 from enums import HttpHeaderEnum
-from exception import ConnectionException, SeerbitException
+from exception import SeerbitConnectionError, SeerbitError
 from requests import post, get, put
 
 
@@ -28,7 +28,7 @@ class HttpClient(IHttpClient, INumericConstants):
     def post(self, service, request_url, params, token):
         if service.requires_token:
             if not token or len(token) < self.MIN_SIZE:
-                raise ConnectionException("Please provide an authentication token.")
+                raise SeerbitConnectionError("Please provide an authentication token.")
             else:
                 header = {
                     "Authorization": "Bearer " + token,
@@ -40,13 +40,13 @@ class HttpClient(IHttpClient, INumericConstants):
             response = post(url=request_url, json=params, headers=header)
         status_code = int(response.status_code)
         if status_code < self.HTTP_STATUS_200 or status_code > self.HTTP_STATUS_299:
-            SeerbitException.handle_exception(response)
+            SeerbitError.handle_exception(response)
         return response.json()
 
     def put(self, service, request_url, params, token):
         if service.requires_token:
             if not token or len(token) < self.MIN_SIZE:
-                raise ConnectionException("Please provide an authentication token.")
+                raise SeerbitConnectionError("Please provide an authentication token.")
             else:
                 header = {
                     "Authorization": "Bearer " + token,
@@ -58,13 +58,13 @@ class HttpClient(IHttpClient, INumericConstants):
             response = put(url=request_url, json=params, headers=header)
         status_code = int(response.status_code)
         if status_code < self.HTTP_STATUS_200 or status_code > self.HTTP_STATUS_299:
-            SeerbitException.handle_exception(response)
+            SeerbitError.handle_exception(response)
         return response.json()
 
     def get(self, service, request_url, token):
         if service.requires_token:
             if not token or len(token) < self.MIN_SIZE:
-                raise ConnectionException("Please provide an authentication token.")
+                raise SeerbitConnectionError("Please provide an authentication token.")
             else:
                 header = {
                     "Authorization": "Bearer " + token,
@@ -76,5 +76,5 @@ class HttpClient(IHttpClient, INumericConstants):
             response = get(url=request_url, headers=header)
         status_code = int(response.status_code)
         if status_code < self.HTTP_STATUS_200 or status_code > self.HTTP_STATUS_299:
-            SeerbitException.handle_exception(response)
+            SeerbitError.handle_exception(response)
         return response.json()

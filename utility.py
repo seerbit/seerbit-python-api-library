@@ -15,7 +15,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
 from client import Client
-from exception import SeerbitException
+from exception import SeerbitError
 
 
 class Utility:
@@ -23,13 +23,13 @@ class Utility:
     @staticmethod
     def non_null(client: Client):
         if not client:
-            raise SeerbitException("Client cannot be null")
+            raise SeerbitError("Client cannot be null")
         if not client.config().get_private_key():
-            raise SeerbitException("private key is required")
+            raise SeerbitError("private key is required")
         if not client.config().get_public_key():
-            raise SeerbitException("public key is required")
+            raise SeerbitError("public key is required")
 
     @staticmethod
     def require_non_null(api_base, error_message):
         if not api_base:
-            raise SeerbitException(error_message)
+            raise SeerbitError(error_message)

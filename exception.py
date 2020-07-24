@@ -16,14 +16,14 @@
  """
 
 
-class SeerbitException(RuntimeError):
+class SeerbitError(RuntimeError):
 
     def __init__(self, message="", code=0, status=None, timestamp=None):
         self.message = message
         self.code = code
         self.status = status
         self.timestamp = timestamp
-        super(SeerbitException, self).__init__(message, code, status, timestamp)
+        super(SeerbitError, self).__init__(message, code, status, timestamp)
 
     @staticmethod
     def handle_exception(response):
@@ -32,11 +32,11 @@ class SeerbitException(RuntimeError):
             pass
 
 
-class ConnectionException(RuntimeError):
+class SeerbitConnectionError(RuntimeError):
 
     def __init__(self, message="", code=0, status=None, timestamp=None):
         self.message = message
         self.code = code
         self.status = status
         self.timestamp = timestamp
-        super(ConnectionException, self).__init__(message, code, status, timestamp)
+        super(SeerbitConnectionError, self).__init__(message, code, status, timestamp)

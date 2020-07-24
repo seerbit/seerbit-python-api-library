@@ -17,7 +17,7 @@
 from config import Config
 from interface.app_interface import IClientConstants
 from enums import EnvironmentEnum
-from exception import SeerbitException
+from exception import SeerbitError
 
 
 class Client:
@@ -30,7 +30,7 @@ class Client:
             if "1.0.1" == version:
                 self.config.put("version", IClientConstants.VERSION_TWO)
             else:
-                raise SeerbitException("Version must be \"1.0.1\"")
+                raise SeerbitError("Version must be \"1.0.1\"")
 
     @property
     def config(self):
@@ -65,7 +65,7 @@ class Client:
         if "1.0.1" == version:
             self._config.put("version", IClientConstants.VERSION_TWO)
         else:
-            raise SeerbitException("Version must be \"1.0.1\"")
+            raise SeerbitError("Version must be \"1.0.1\"")
 
     @property
     def environment(self):
@@ -85,7 +85,7 @@ class Client:
         else:
             msg = "This environment does not exist, use \"{0}\" or \"{1}\""
             error_message = msg.format(EnvironmentEnum.LIVE.value, EnvironmentEnum.TEST.value)
-            raise SeerbitException(error_message)
+            raise SeerbitError(error_message)
 
     @property
     def api_base(self):

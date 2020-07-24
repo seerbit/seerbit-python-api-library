@@ -16,7 +16,7 @@
  """
 from client import Client
 from enums import EnvironmentEnum
-from exception import SeerbitException
+from exception import SeerbitError
 from httpclient import HttpClient
 from interface.service_interface import IService, IRequest
 from utility import Utility
@@ -35,13 +35,13 @@ class Service(IService, IRequest):
         if not client.config.get("environment"):
             msg = "Client does not have correct environment. Use {0} or {1}"
             self.message = msg.format(EnvironmentEnum.LIVE.value, EnvironmentEnum.TEST.value)
-            raise SeerbitException(self.message)
+            raise SeerbitError(self.message)
         if not client.config.get("public_key"):
             self.message = "Client doesn\'t have a merchant public key. Set a public key using the client"
-            raise SeerbitException(self.message)
+            raise SeerbitError(self.message)
         if not client.config.get("private_key"):
             self.message = "Client doesn\'t have a merchant private key. Set a private key using the client"
-            raise SeerbitException(self.message)
+            raise SeerbitError(self.message)
         self.http_client = HttpClient()
         Service._client = client
 
