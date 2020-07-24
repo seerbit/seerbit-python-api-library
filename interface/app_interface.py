@@ -72,7 +72,7 @@ class IClientConstants(object):
     LIVE_API_BASE = "https://seerbitapi.com/"
 
     # authentication
-    AUTHENTICATION_ENDPOINT = "encrypt/keys"
+    AUTHENTICATION_ENDPOINT = "api/v2/encrypt/keys"
 
     # bank & card payment options
     INITIATE_PAYMENT_ENDPOINT = "api/v2/payments/initiates"

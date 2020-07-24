@@ -24,10 +24,6 @@ class Utility:
     def non_null(client: Client):
         if not client:
             raise SeerbitError("Client cannot be null")
-        if not client.config().get_private_key():
-            raise SeerbitError("private key is required")
-        if not client.config().get_public_key():
-            raise SeerbitError("public key is required")
 
     @staticmethod
     def require_non_null(api_base, error_message):

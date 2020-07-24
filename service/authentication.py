@@ -14,6 +14,8 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
+import json
+
 from interface.app_interface import IClientConstants, INumericConstants
 from client import Client
 from config import Config
@@ -25,7 +27,7 @@ from utility import Utility
 class Authentication(IAuthentication, Service, IClientConstants, INumericConstants):
 
     def __init__(self, client: Client):
-        super().__init__(Authentication, self, client)
+        super(Authentication, self).__init__(client)
         Utility.non_null(client)
 
     def auth(self):
@@ -36,6 +38,7 @@ class Authentication(IAuthentication, Service, IClientConstants, INumericConstan
         }
         key = config.private_key + "." + config.public_key
         payload["key"] = key
+        print("request: " + json.dumps(payload))
         self.response = self.post_request(IClientConstants.AUTHENTICATION_ENDPOINT, payload, None)
         return self.response
 
@@ -44,6 +47,7 @@ class Authentication(IAuthentication, Service, IClientConstants, INumericConstan
         if self.response:
             if "data" in self.response:
                 encrypted_key_dict = self.response["data"]
-                if "encryptedKey" in encrypted_key_dict:
+                if "EncryptedSecKey" in encrypted_key_dict:
+                    encrypted_key_dict = encrypted_key_dict["EncryptedSecKey"]
                     encrypted_key = encrypted_key_dict.get("encryptedKey")
         return encrypted_key

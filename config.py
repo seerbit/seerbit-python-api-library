@@ -30,14 +30,14 @@ class Config(IConfig, INumericConstants):
     def public_key(self) -> str:
         public_key = ""
         if len(Config.data) != 0:
-            public_key = Config.data.get("publicKey")
+            public_key = Config.data.get("public_key")
         return public_key
 
     @property
     def private_key(self) -> str:
         private_key = ""
         if len(Config.data) != 0:
-            private_key = Config.data.get("privateKey")
+            private_key = Config.data.get("private_key")
         return private_key
 
     def put(self, key, value):

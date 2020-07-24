@@ -27,9 +27,7 @@ class SeerbitError(RuntimeError):
 
     @staticmethod
     def handle_error(response):
-        json = response.json()
-        if json['message'] and json['errorCode']:
-            pass
+        print(response)
 
 
 class SeerbitConnectionError(RuntimeError):

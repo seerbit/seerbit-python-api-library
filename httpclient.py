@@ -34,6 +34,9 @@ class HttpClient(IHttpClient, INumericConstants):
                     "Authorization": "Bearer " + token,
                     str(HttpHeaderEnum.CONTENT_TYPE_PARAM.value): str(HttpHeaderEnum.CONTENT_TYPE_VALUE.value)
                 }
+                print(params)
+                print(request_url)
+                print(token)
                 response = post(url=request_url, json=params, headers=header)
         else:
             header = {str(HttpHeaderEnum.CONTENT_TYPE_PARAM.value): str(HttpHeaderEnum.CONTENT_TYPE_VALUE.value)}
@@ -41,7 +44,7 @@ class HttpClient(IHttpClient, INumericConstants):
         status_code = int(response.status_code)
         if status_code < self.HTTP_STATUS_200 or status_code > self.HTTP_STATUS_299:
             SeerbitError.handle_error(response)
-        return response.json()
+        return response
 
     def put(self, service, request_url, params, token):
         if service.requires_token:
@@ -59,7 +62,7 @@ class HttpClient(IHttpClient, INumericConstants):
         status_code = int(response.status_code)
         if status_code < self.HTTP_STATUS_200 or status_code > self.HTTP_STATUS_299:
             SeerbitError.handle_error(response)
-        return response.json()
+        return response
 
     def get(self, service, request_url, token):
         if service.requires_token:
@@ -77,4 +80,4 @@ class HttpClient(IHttpClient, INumericConstants):
         status_code = int(response.status_code)
         if status_code < self.HTTP_STATUS_200 or status_code > self.HTTP_STATUS_299:
             SeerbitError.handle_error(response)
-        return response.json()
+        return response
