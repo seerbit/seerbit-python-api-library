@@ -19,7 +19,6 @@ from client import Client
 from config import Config
 from enums import EnvironmentEnum
 from seerbit import Seerbit
-from service.account_service import AccountService
 from service.authentication import Authentication
 from service.card_service import CardService
 
