@@ -36,7 +36,7 @@ class CardService(Service, ICardService, IClientConstants):
         return self.response
 
     def validate(self, transaction: dict):
-        """ POST /api/v2/payments/initiates """
+        """ POST /api/v2/payments/otp """
         self.requires_token = True
         CardValidator.is_valid_validate(payload=transaction)
         self.response = self.post_request(IClientConstants.VALIDATE_CARD_PAYMENT_ENDPOINT, transaction, self.token)

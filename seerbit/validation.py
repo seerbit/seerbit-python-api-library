@@ -195,6 +195,8 @@ class CardValidator(object):
     def is_valid_payment_charge_non3d(payload: dict) -> bool:
         msg = ""
         is_valid = True
+        if "publicKey" not in payload:
+            msg += "\"publicKey\" field is required\n"
         if "amount" not in payload:
             msg += "\"amount\" field is required\n"
         if "cardNumber" not in payload:
