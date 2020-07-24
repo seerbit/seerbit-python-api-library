@@ -42,25 +42,25 @@ def authenticate() -> str:
 
 
 def card_payment_cancel(token_str: str):
-    """ Initiate Card Payment Capture """
-    print("================== start card pre-auth ==================")
+    """ Initiate Card Payment Cancel """
+    print("================== start card payment cancel ==================")
     random_number = randint(10000000, 99999999)
     payment_ref = "SBT_" + str(random_number)
     card_payload = {
         "paymentReference": payment_ref,
         "publicKey": client.public_key,
         "country": "KE",
-        "productDescription": "preauth test capture"
+        "productDescription": "test cancel"
     }
     card_service = CardService(client, token_str)
     json_response = card_service.payment_cancel(card_payload)
-    print("================== stop card pre-auth ==================")
+    print("================== stop card payment cancel ==================")
     return json_response
 
 
 token = authenticate()
 
 if token:
-    print("card capture payment response: " + str(card_payment_cancel(token)))
+    print("card cancel payment response: " + str(card_payment_cancel(token)))
 else:
     print("authentication failure")

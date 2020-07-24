@@ -43,7 +43,7 @@ def authenticate() -> str:
 
 def card_payment_capture(token_str: str):
     """ Initiate Card Payment Capture """
-    print("================== start card pre-auth ==================")
+    print("================== start card payment capture ==================")
     random_number = randint(10000000, 99999999)
     payment_ref = "SBT_" + str(random_number)
     card_payload = {
@@ -51,12 +51,12 @@ def card_payment_capture(token_str: str):
         "publicKey": client.public_key,
         "currency": "KES",
         "country": "KE",
-        "productDescription": "preauth test capture",
+        "productDescription": "test capture",
         "amount": "100.00"
     }
     card_service = CardService(client, token_str)
     json_response = card_service.payment_capture(card_payload)
-    print("================== stop card pre-auth ==================")
+    print("================== stop card payment capture ==================")
     return json_response
 
 
