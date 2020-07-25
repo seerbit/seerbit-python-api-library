@@ -85,9 +85,9 @@ class IClientConstants(object):
     PAYMENT_CHARGE_ENDPOINT = "api/v2/payments/charge"
 
     # refunds
-    REFUND_ENDPOINT = "merchants/api/v1/user/%s/refunds"
-    REFUND_DETAIL_ENDPOINT = "merchants/api/v1/user/%s/refunds/%s"
-    REFUND_LIST_ENDPOINT = "merchants/api/v1/user/%s/refunds?page=%s&size=%s"
+    REFUND_ENDPOINT = "merchants/api/v1/user/{0}/refunds"
+    REFUND_DETAIL_ENDPOINT = "merchants/api/v1/user/{0}/refunds/{1}"
+    REFUND_LIST_ENDPOINT = "merchants/api/v1/user/{0}/refunds?page={1}&size={2}"
 
     # orders
     ORDERS_ENDPOINT = "api/v2/payments/order"
@@ -97,17 +97,17 @@ class IClientConstants(object):
 
     # recurring
     SUBSCRIPTION_ENDPOINT = "api/v2/recurring/subscribes"
-    CUSTOMER_SUBSCRIPTION_ENDPOINT = "api/v2/recurring/%s/customerId/%s"
+    CUSTOMER_SUBSCRIPTION_ENDPOINT = "api/v2/recurring/{0}/customerId/{1}"
     UPDATE_SUBSCRIPTION_ENDPOINT = "api/v2/recurring/updates"
-    MERCHANT_SUBSCRIPTIONS_ENDPOINT = "api/v2/recurring/publicKey/%s"
+    MERCHANT_SUBSCRIPTIONS_ENDPOINT = "api/v2/recurring/publicKey/{0}"
     CHARGE_ENDPOINT = "api/v2/recurring/charge"
 
     # status queries
-    TRX_STATUS_ENDPOINT = "api/v2/payments/query/%s"
-    SUBSCRIPTION_STATUS_ENDPOINT = "api/v2/recurring/billingId/%S"
+    TRX_STATUS_ENDPOINT = "api/v2/payments/query/{0}"
+    SUBSCRIPTION_STATUS_ENDPOINT = "api/v2/recurring/billingId/{0}"
 
     # bank list
-    BANK_LIST_ENDPOINT = "api/v2/banks/merchant/%s"
+    BANK_LIST_ENDPOINT = "api/v2/banks/merchant/{0}"
 
     # version types
     VERSION_ONE = "1.0.0"

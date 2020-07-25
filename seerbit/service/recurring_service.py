@@ -17,21 +17,43 @@
 from seerbit.interface.app_interface import IClientConstants
 from seerbit.interface.service_interface import IRecurringService
 from seerbit.service.servicelib import Service
+from seerbit.utility import Utility
+from seerbit.validation import RecurringValidator
 
 
 class RecurringService(Service, IRecurringService, IClientConstants):
 
+    def __init__(self, client, token):
+        super(RecurringService, self).__init__(client, token)
+        self.token = token
+        Utility.non_null(client)
+
     def create_subscription(self, subscription):
-        pass
+        """ POST /api/v2/recurring/subscribes """
+        self.requires_token = True
+        RecurringValidator.is_valid_create_subscription(payload=subscription)
+        self.response = self.post_request(IClientConstants.SUBSCRIPTION_ENDPOINT, subscription, self.token)
+        return self.response
 
     def get_customer_subscriptions(self, public_key, customer_id):
-        pass
+        """ GET /api/v2/recurring/{public_key} """
+        self.requires_token = True
+        self.response = self.get_request(IClientConstants.CUSTOMER_SUBSCRIPTION_ENDPOINT, public_key, self.token)
+        return self.response
 
     def update_subscription(self, subscription):
-        pass
+        """ POST /api/v2/recurring/updates """
+        self.requires_token = True
+        RecurringValidator.is_valid_update_subscription(payload=subscription)
+        self.response = self.post_request(IClientConstants.UPDATE_SUBSCRIPTION_ENDPOINT, subscription, self.token)
+        return self.response
 
     def get_merchant_subscriptions(self, public_key):
         pass
 
     def recurring_debit(self, recurring_debit):
-        pass
+        """ POST /api/v2/recurring/charge """
+        self.requires_token = True
+        RecurringValidator.is_valid_recurring_debit(payload=recurring_debit)
+        self.response = self.post_request(IClientConstants.CHARGE_ENDPOINT, recurring_debit, self.token)
+        return self.response
