@@ -312,10 +312,13 @@ class OrderValidator(object):
             msg += "\"paymentReference\" field is required\n"
         if "email" not in payload:
             msg += "\"email\" field is required\n"
-        if "orderId" not in payload:
-            msg += "\"orderId\" field is required\n"
         if "orderType" not in payload:
             msg += "\"orderType\" field is required\n"
+        if "orders" in payload:
+            for orders in payload["orders"]:
+                if "orderId" not in orders:
+                    msg += "\"orderId\" field in \"orders\" element is required\n"
+                    break
         if msg != "":
             is_valid = False
         if not is_valid:

@@ -17,7 +17,7 @@
 from seerbit.interface.app_interface import IClientConstants
 from seerbit.interface.service_interface import IOrderService
 from seerbit.service.servicelib import Service
-from seerbit.validation import MobileMoneyValidator
+from seerbit.validation import OrderValidator
 from seerbit.utility import Utility
 
 
@@ -31,6 +31,6 @@ class OrderService(Service, IOrderService, IClientConstants):
     def authorize(self, mobile_money: dict):
         """ POST /api/v2/payments/initiates """
         self.requires_token = True
-        MobileMoneyValidator.is_valid_authorize(payload=mobile_money)
+        OrderValidator.is_valid_authorize(payload=mobile_money)
         self.response = self.post_request(IClientConstants.ORDERS_ENDPOINT, mobile_money, self.token)
         return self.response
