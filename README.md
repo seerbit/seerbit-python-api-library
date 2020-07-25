@@ -86,7 +86,7 @@ To initiate a transaction request you need to perform authentication operation a
     token = auth_service.get_token()
 ```
 
-Then retrieve your token after authenticating and pass it to the CardService constructor along with your client object. You can then construct your payload and call the <code>doAuthorize()</code> method of the CardService class.
+After you have retrieved your token, pass it to the AccountService constructor along with your client object. You can then construct your payload and call the <code>authorize()</code> method of the AccountService class.
 ```python
     from random import randint
     from seerbit.service.account_service import AccountService
@@ -122,7 +122,7 @@ Then retrieve your token after authenticating and pass it to the CardService con
     json_response = account_service.authorize(account_payload)
 ``` 
 
-Find more examples [here](https://github.com/seerbit/seerbit-java-v1/tree/master/src/main/java/com/seerbit/demo).
+Find more examples [here](https://github.com/seerbit/).
 
 ## Licence
 GNU General Public License. For more information, see the LICENSE file.
