@@ -24,7 +24,7 @@ from seerbit.validation import RecurringValidator
 class RecurringService(Service, IRecurringService, IClientConstants):
 
     def __init__(self, client, token):
-        super(RecurringService, self).__init__(client, token)
+        super(RecurringService, self).__init__(client)
         self.token = token
         Utility.non_null(client)
 
@@ -36,20 +36,25 @@ class RecurringService(Service, IRecurringService, IClientConstants):
         return self.response
 
     def get_customer_subscriptions(self, public_key, customer_id):
-        """ GET /api/v2/recurring/{public_key} """
+        """ GET /api/v2/recurring/{public_key}/customerId/{customer_id} """
         self.requires_token = True
-        self.response = self.get_request(IClientConstants.CUSTOMER_SUBSCRIPTION_ENDPOINT, public_key, self.token)
+        endpoint = IClientConstants.CUSTOMER_SUBSCRIPTION_ENDPOINT.format(public_key, customer_id)
+        self.response = self.get_request(endpoint, self.token)
         return self.response
 
     def update_subscription(self, subscription):
-        """ POST /api/v2/recurring/updates """
+        """ PUT /api/v2/recurring/updates """
         self.requires_token = True
         RecurringValidator.is_valid_update_subscription(payload=subscription)
-        self.response = self.post_request(IClientConstants.UPDATE_SUBSCRIPTION_ENDPOINT, subscription, self.token)
+        self.response = self.put_request(IClientConstants.UPDATE_SUBSCRIPTION_ENDPOINT, subscription, self.token)
         return self.response
 
     def get_merchant_subscriptions(self, public_key):
-        pass
+        """ GET /api/v2/recurring/publicKey/{public_key} """
+        self.requires_token = True
+        endpoint = IClientConstants.MERCHANT_SUBSCRIPTIONS_ENDPOINT.format(public_key)
+        self.response = self.get_request(endpoint, self.token)
+        return self.response
 
     def recurring_debit(self, recurring_debit):
         """ POST /api/v2/recurring/charge """

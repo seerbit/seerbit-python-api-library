@@ -14,7 +14,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
-from random import randint
 from seerbit.client import Client
 from seerbit.config import Config
 from seerbit.enums import EnvironmentEnum
@@ -31,8 +30,8 @@ def authenticate() -> str:
     client.api_base = Seerbit.LIVE_API_BASE
     client.environment = EnvironmentEnum.LIVE.value
     config = Config()
-    config.put("public_key", "public2key")
-    config.put("private_key", "private2key")
+    config.put("public_key", "SBPUBK_CECPLUSINMDQIHH3GYV2NNYHGPV9JEKQ")
+    config.put("private_key", "SBSECK_QE6COEUSHARTIDH3GWHGGRUVTPCUMNYJX4H0VD7N")
     client.config = config
     client.timeout = 20
     auth_service = Authentication(client)
@@ -41,42 +40,27 @@ def authenticate() -> str:
     return auth_service.get_token()
 
 
-def create_subscription(token_str: str):
+def update_subscription(token_str: str):
     """ Initiate Recurrent Subscription """
-    print("================== start create subscription ==================")
-    random_number = randint(10000000, 99999999)
-    payment_ref = "SBT_" + str(random_number)
+    print("================== start subscription ==================")
     recurring_payload = {
-        "publicKey": client.public_key,
-        "paymentReference": payment_ref,
-        "planId": "",
-        "cardNumber": "2223000000000007",
-        "expiryMonth": "05",
-        "callbackUrl": "https://checkout.seerbitapi.com",
-        "expiryYear": "21",
-        "cvv": "100",
-        "amount": "20",
+        "amount": "200",
         "currency": "NGN",
-        "productDescription": "Test Token",
-        "productId": "Terrain",
         "country": "NG",
-        "startDate": "2019-01-11",
-        "cardName": "Bola Olat",
-        "billingCycle": "DAILY",
-        "email": "johndoe@gmail.com",
-        "mobileNumber": "09022323537",
-        "billingPeriod": "4",
-        "subscriptionAmount": False
+        "mobileNumber": "08033456500",
+        "billingId": "PUBK_PjQ5d1578650322483",
+        "publicKey": client.public_key,
+        "status": "INACTIVE"
     }
     recurring_service = RecurringService(client, token_str)
-    json_response = recurring_service.create_subscription(recurring_payload)
-    print("================== stop create subscription ==================")
+    json_response = recurring_service.update_subscription(recurring_payload)
+    print("================== stop subscription ==================")
     return json_response
 
 
 token = authenticate()
 
 if token:
-    print("subscription response: " + str(create_subscription(token)))
+    print("subscription response: " + str(update_subscription(token)))
 else:
     print("authentication failure")

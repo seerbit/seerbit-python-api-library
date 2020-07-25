@@ -329,7 +329,7 @@ class OrderValidator(object):
 class RecurringValidator(object):
 
     @staticmethod
-    def is_valid_create_subscription(self, payload) -> bool:
+    def is_valid_create_subscription(payload) -> bool:
         msg = ""
         is_valid = True
         if "publicKey" not in payload:
@@ -358,8 +358,8 @@ class RecurringValidator(object):
             msg += "\"billingCycle\" field is required\n"
         if "email" not in payload:
             msg += "\"email\" field is required\n"
-        if "customerId" not in payload:
-            msg += "\"customerId\" field is required\n"
+        # if "customerId" not in payload:
+        #     msg += "\"customerId\" field is required\n"
         if "billingPeriod" not in payload:
             msg += "\"billingPeriod\" field is required\n"
         if msg != "":
@@ -369,7 +369,7 @@ class RecurringValidator(object):
         return is_valid
 
     @staticmethod
-    def is_valid_update_subscription(self, payload) -> bool:
+    def is_valid_update_subscription(payload) -> bool:
         msg = ""
         is_valid = True
         if "publicKey" not in payload:
@@ -391,7 +391,7 @@ class RecurringValidator(object):
         return is_valid
 
     @staticmethod
-    def is_valid_recurring_debit(self, payload) -> bool:
+    def is_valid_recurring_debit(payload) -> bool:
         msg = ""
         is_valid = True
         if "authorizationCode" not in payload:

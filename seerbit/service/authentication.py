@@ -14,8 +14,6 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
-import json
-
 from seerbit.interface.app_interface import IClientConstants, INumericConstants
 from seerbit.client import Client
 from seerbit.config import Config
@@ -38,7 +36,6 @@ class Authentication(IAuthentication, Service, IClientConstants, INumericConstan
         }
         key = config.private_key + "." + config.public_key
         payload["key"] = key
-        print("request: " + json.dumps(payload))
         self.response = self.post_request(IClientConstants.AUTHENTICATION_ENDPOINT, payload, None)
         return self.response
 
