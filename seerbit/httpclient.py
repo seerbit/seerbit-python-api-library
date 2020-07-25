@@ -34,9 +34,6 @@ class HttpClient(IHttpClient, INumericConstants):
                     "Authorization": "Bearer " + token,
                     str(HttpHeaderEnum.CONTENT_TYPE_PARAM.value): str(HttpHeaderEnum.CONTENT_TYPE_VALUE.value)
                 }
-                print(params)
-                print(request_url)
-                print(token)
                 response = post(url=request_url, json=params, headers=header)
         else:
             header = {str(HttpHeaderEnum.CONTENT_TYPE_PARAM.value): str(HttpHeaderEnum.CONTENT_TYPE_VALUE.value)}

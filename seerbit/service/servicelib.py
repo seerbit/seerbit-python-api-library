@@ -66,7 +66,6 @@ class Service(IService, IRequest):
         message = "Set a field named \"api_base\" in the client configuration"
         Utility.require_non_null(self.client.config.get("api_base"), message)
         endpoint_url = str(self.client.config.get("api_base")) + endpoint
-        print("endpoint: " + endpoint_url)
         json = self.http_client.post(self, endpoint_url, payload, token)
         return json.json()
 
