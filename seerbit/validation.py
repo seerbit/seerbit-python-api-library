@@ -34,7 +34,9 @@ class AccountValidator(object):
             msg += "\"country\" field is required\n"
         if "email" not in schema:
             msg += "\"email\" field is required\n"
-        if msg != "":
+        if "paymentType" not in schema:
+            msg += "\"paymentType\" field is required\n"
+        if msg != "\"paymentType\" field is required\n":
             is_valid = False
         if not is_valid:
             raise ValueError(msg)

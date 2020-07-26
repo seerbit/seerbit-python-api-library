@@ -14,20 +14,24 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
+from requests import Response
 
 
 class SeerbitError(RuntimeError):
 
-    def __init__(self, message="", code=0, status=None, timestamp=None):
+    def __init__(self, message=""):
         self.message = message
-        self.code = code
-        self.status = status
-        self.timestamp = timestamp
-        super(SeerbitError, self).__init__(message, code, status, timestamp)
+        super(SeerbitError, self).__init__(message)
 
     @staticmethod
-    def handle_error(response):
-        print(response)
+    def handle_error(response: Response):
+        json_object = response.json()
+        error_message = "{0}: {1}"
+        if json_object["message"] and json_object.get("errorCode"):
+            error_message = error_message.format(str(json_object["message"]), str(json_object["errorCode"]))
+            print(error_message)
+            raise SeerbitError(str(json_object["message"]),)
+        raise SeerbitError(json_object["message"])
 
 
 class SeerbitConnectionError(RuntimeError):
