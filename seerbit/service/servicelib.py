@@ -29,7 +29,13 @@ class Service(IService, IRequest):
     token: str
     response: dict
 
-    def __init__(self, client):
+    def __init__(self, client: Client):
+        """
+
+        :param Client client:
+            A non optional Client, the client with config
+
+        """
         self._requires_token = False
         Utility.non_null(client)
         if not client.config.get("environment"):
@@ -46,11 +52,11 @@ class Service(IService, IRequest):
         Service._client = client
 
     @property
-    def requires_token(self):
+    def requires_token(self) -> bool:
         return self._requires_token
 
     @requires_token.setter
-    def requires_token(self, is_required):
+    def requires_token(self, is_required: bool):
         self._requires_token = is_required
 
     @property
@@ -58,7 +64,7 @@ class Service(IService, IRequest):
         return Service._client
 
     @client.setter
-    def client(self, client):
+    def client(self, client: Client):
         Utility.non_null(client)
         Service._client = client
 

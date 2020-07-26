@@ -41,7 +41,7 @@ def authenticate() -> str:
 
 
 def get_bank_list(token_str: str):
-    """ Get Transaction Status """
+    """ Get Bank List """
     print("================== start get bank list ==================")
     resource_service = ResourceService(client, token_str)
     json_response = resource_service.get_bank_list(client.public_key)
@@ -52,7 +52,6 @@ def get_bank_list(token_str: str):
 token = authenticate()
 
 if token:
-    billing_id = "367567478"
     print("get bank list response: " + str(get_bank_list(token)))
 else:
     print("authentication failure")

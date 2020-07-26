@@ -14,6 +14,7 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
+from seerbit.client import Client
 from seerbit.interface.app_interface import IClientConstants
 from seerbit.interface.service_interface import IAccountService
 from seerbit.service.servicelib import Service
@@ -23,23 +24,48 @@ from seerbit.utility import Utility
 
 class AccountService(Service, IAccountService, IClientConstants):
 
-    def __init__(self, client, token):
+    def __init__(self, client: Client, token: str):
+        """
+
+        :param Client client:
+            A non optional Client, the client with config
+
+        :param str token:
+            A non optional string, the auth token
+
+        """
         super(AccountService, self).__init__(client)
         self.token = token
         Utility.non_null(client)
 
     def authorize(self, account_payload: dict):
-        """POST /api/v2/payments/initiates"""
-        AccountValidator.is_valid_authorize(payload=account_payload)
+        """
+
+        POST /api/v2/payments/initiates
+
+        :param dict account_payload:
+            A non optional dict, the payload
+
+        :returns: Any self.response
+
+        """
+        AccountValidator.is_valid_authorize(schema=account_payload)
         self.requires_token = True
-        client = self.client
-        account_payload.update({"publicKey": client.public_key})
-        response = self.post_request(IClientConstants.INITIATE_PAYMENT_ENDPOINT, account_payload, self.token)
-        return response
+        self.response = self.post_request(IClientConstants.INITIATE_PAYMENT_ENDPOINT, account_payload, self.token)
+        return self.response
 
     def validate(self, otp_payload: dict):
-        """POST /api/v2/payments/validate"""
-        AccountValidator.is_valid_validate(payload=otp_payload)
+        """
+
+        POST /api/v2/payments/validate
+
+        :param dict otp_payload:
+            A non optional dict, the payload
+
+        :returns: Any self.response
+
+        """
+        AccountValidator.is_valid_validate(schema=otp_payload)
         self.requires_token = True
-        response = self.post_request(IClientConstants.VALIDATE_PAYMENT_ENDPOINT, otp_payload, self.token)
-        return response
+        self.response = self.post_request(IClientConstants.VALIDATE_PAYMENT_ENDPOINT, otp_payload, self.token)
+        return self.response

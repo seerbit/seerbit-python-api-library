@@ -19,20 +19,20 @@
 class AccountValidator(object):
 
     @staticmethod
-    def is_valid_authorize(payload: dict) -> bool:
+    def is_valid_authorize(schema: dict) -> bool:
         msg = ""
         is_valid = True
-        if "amount" not in payload:
+        if "amount" not in schema:
             msg += "\"amount\" field is required\n"
-        if "accountName" not in payload:
+        if "accountName" not in schema:
             msg += "\"accountName\" field is required\n"
-        if "bankCode" not in payload:
+        if "bankCode" not in schema:
             msg += "\"bankCode\" field is required\n"
-        if "currency" not in payload:
+        if "currency" not in schema:
             msg += "\"currency\" field is required\n"
-        if "country" not in payload:
+        if "country" not in schema:
             msg += "\"country\" field is required\n"
-        if "email" not in payload:
+        if "email" not in schema:
             msg += "\"email\" field is required\n"
         if msg != "":
             is_valid = False
@@ -41,12 +41,12 @@ class AccountValidator(object):
         return is_valid
 
     @staticmethod
-    def is_valid_validate(payload: dict) -> bool:
+    def is_valid_validate(schema: dict) -> bool:
         msg = ""
         is_valid = True
-        if "otp" not in payload:
+        if "otp" not in schema:
             msg += "\"otp\" field is required\n"
-        if "linkingReference" not in payload:
+        if "linkingReference" not in schema:
             msg += "\"linkingReference\" field is required\n"
         if msg != "":
             is_valid = False
@@ -58,26 +58,26 @@ class AccountValidator(object):
 class CardValidator(object):
 
     @staticmethod
-    def is_valid_authorize(payload: dict) -> bool:
+    def is_valid_authorize(schema: dict) -> bool:
         msg = ""
         is_valid = True
-        if "amount" not in payload:
+        if "amount" not in schema:
             msg += "\"amount\" field is required\n"
-        if "cardNumber" not in payload:
+        if "cardNumber" not in schema:
             msg += "\"cardNumber\" field is required\n"
-        if "cvv" not in payload:
+        if "cvv" not in schema:
             msg += "\"cvv\" field is required\n"
-        if "expiryMonth" not in payload:
+        if "expiryMonth" not in schema:
             msg += "\"expiryMonth\" field is required\n"
-        if "expiryYear" not in payload:
+        if "expiryYear" not in schema:
             msg += "\"expiryYear\" field is required\n"
-        if "currency" not in payload:
+        if "currency" not in schema:
             msg += "\"currency\" field is required\n"
-        if "country" not in payload:
+        if "country" not in schema:
             msg += "\"country\" field is required\n"
-        if "fullName" not in payload:
+        if "fullName" not in schema:
             msg += "\"fullName\" field is required\n"
-        if "email" not in payload:
+        if "email" not in schema:
             msg += "\"email\" field is required\n"
         if msg != "":
             is_valid = False
@@ -86,16 +86,16 @@ class CardValidator(object):
         return is_valid
 
     @staticmethod
-    def is_valid_validate(payload: dict) -> bool:
+    def is_valid_validate(schema: dict) -> bool:
         msg = ""
         is_valid = True
-        if "transaction" not in payload:
+        if "transaction" not in schema:
             msg += "\"transaction\" field is required\n"
-        elif payload["transaction"]:
-            payload = payload["transaction"]
-            if "otp" not in payload:
+        elif schema["transaction"]:
+            schema = schema["transaction"]
+            if "otp" not in schema:
                 msg += "\"otp\" field is required\n"
-            if "linkingreference" not in payload:
+            if "linkingreference" not in schema:
                 msg += "\"linkingreference\" field is required\n"
         if msg != "":
             is_valid = False
@@ -104,28 +104,28 @@ class CardValidator(object):
         return is_valid
 
     @staticmethod
-    def is_valid_preauth(payload: dict) -> bool:
+    def is_valid_preauth(schema: dict) -> bool:
         msg = ""
         is_valid = True
-        if "publicKey" not in payload:
+        if "publicKey" not in schema:
             msg += "\"publicKey\" field is required\n"
-        if "amount" not in payload:
+        if "amount" not in schema:
             msg += "\"amount\" field is required\n"
-        if "currency" not in payload:
+        if "currency" not in schema:
             msg += "\"currency\" field is required\n"
-        if "country" not in payload:
+        if "country" not in schema:
             msg += "\"country\" field is required\n"
-        if "paymentReference" not in payload:
+        if "paymentReference" not in schema:
             msg += "\"paymentReference\" field is required\n"
-        if "email" not in payload:
+        if "email" not in schema:
             msg += "\"email\" field is required\n"
-        if "cardNumber" not in payload:
+        if "cardNumber" not in schema:
             msg += "\"cardNumber\" field is required\n"
-        if "cvv" not in payload:
+        if "cvv" not in schema:
             msg += "\"cvv\" field is required\n"
-        if "expiryMonth" not in payload:
+        if "expiryMonth" not in schema:
             msg += "\"expiryMonth\" field is required\n"
-        if "expiryYear" not in payload:
+        if "expiryYear" not in schema:
             msg += "\"expiryYear\" field is required\n"
         if msg != "":
             is_valid = False
@@ -134,20 +134,20 @@ class CardValidator(object):
         return is_valid
 
     @staticmethod
-    def is_valid_payment_capture(payload: dict) -> bool:
+    def is_valid_payment_capture(schema: dict) -> bool:
         msg = ""
         is_valid = True
-        if "publicKey" not in payload:
+        if "publicKey" not in schema:
             msg += "\"publicKey\" field is required\n"
-        if "amount" not in payload:
+        if "amount" not in schema:
             msg += "\"amount\" field is required\n"
-        if "currency" not in payload:
+        if "currency" not in schema:
             msg += "\"currency\" field is required\n"
-        if "country" not in payload:
+        if "country" not in schema:
             msg += "\"country\" field is required\n"
-        if "paymentReference" not in payload:
+        if "paymentReference" not in schema:
             msg += "\"paymentReference\" field is required\n"
-        if "productDescription" not in payload:
+        if "productDescription" not in schema:
             msg += "\"productDescription\" field is required\n"
         if msg != "":
             is_valid = False
@@ -156,18 +156,18 @@ class CardValidator(object):
         return is_valid
 
     @staticmethod
-    def is_valid_payment_refund(payload: dict) -> bool:
+    def is_valid_payment_refund(schema: dict) -> bool:
         msg = ""
         is_valid = True
-        if "publicKey" not in payload:
+        if "publicKey" not in schema:
             msg += "\"publicKey\" field is required\n"
-        if "amount" not in payload:
+        if "amount" not in schema:
             msg += "\"amount\" field is required\n"
-        if "currency" not in payload:
+        if "currency" not in schema:
             msg += "\"currency\" field is required\n"
-        if "country" not in payload:
+        if "country" not in schema:
             msg += "\"country\" field is required\n"
-        if "paymentReference" not in payload:
+        if "paymentReference" not in schema:
             msg += "\"paymentReference\" field is required\n"
         if msg != "":
             is_valid = False
@@ -176,14 +176,14 @@ class CardValidator(object):
         return is_valid
 
     @staticmethod
-    def is_valid_payment_cancel(payload: dict) -> bool:
+    def is_valid_payment_cancel(schema: dict) -> bool:
         msg = ""
         is_valid = True
-        if "publicKey" not in payload:
+        if "publicKey" not in schema:
             msg += "\"publicKey\" field is required\n"
-        if "country" not in payload:
+        if "country" not in schema:
             msg += "\"country\" field is required\n"
-        if "paymentReference" not in payload:
+        if "paymentReference" not in schema:
             msg += "\"paymentReference\" field is required\n"
         if msg != "":
             is_valid = False
@@ -192,26 +192,26 @@ class CardValidator(object):
         return is_valid
 
     @staticmethod
-    def is_valid_payment_charge_non3d(payload: dict) -> bool:
+    def is_valid_payment_charge_non3d(schema: dict) -> bool:
         msg = ""
         is_valid = True
-        if "publicKey" not in payload:
+        if "publicKey" not in schema:
             msg += "\"publicKey\" field is required\n"
-        if "amount" not in payload:
+        if "amount" not in schema:
             msg += "\"amount\" field is required\n"
-        if "cardNumber" not in payload:
+        if "cardNumber" not in schema:
             msg += "\"cardNumber\" field is required\n"
-        if "cvv" not in payload:
+        if "cvv" not in schema:
             msg += "\"cvv\" field is required\n"
-        if "expiryMonth" not in payload:
+        if "expiryMonth" not in schema:
             msg += "\"expiryMonth\" field is required\n"
-        if "expiryYear" not in payload:
+        if "expiryYear" not in schema:
             msg += "\"expiryYear\" field is required\n"
-        if "currency" not in payload:
+        if "currency" not in schema:
             msg += "\"currency\" field is required\n"
-        if "country" not in payload:
+        if "country" not in schema:
             msg += "\"country\" field is required\n"
-        if "paymentReference" not in payload:
+        if "paymentReference" not in schema:
             msg += "\"paymentReference\" field is required\n"
         if msg != "":
             is_valid = False
@@ -220,36 +220,36 @@ class CardValidator(object):
         return is_valid
 
     @staticmethod
-    def is_valid_payment_charge_3ds(payload: dict) -> bool:
+    def is_valid_payment_charge_3ds(schema: dict) -> bool:
         msg = ""
         is_valid = True
-        if "publicKey" not in payload:
+        if "publicKey" not in schema:
             msg += "\"publicKey\" field is required\n"
-        if "amount" not in payload:
+        if "amount" not in schema:
             msg += "\"amount\" field is required\n"
-        if "cardNumber" not in payload:
+        if "cardNumber" not in schema:
             msg += "\"cardNumber\" field is required\n"
-        if "cvv" not in payload:
+        if "cvv" not in schema:
             msg += "\"cvv\" field is required\n"
-        if "expiryMonth" not in payload:
+        if "expiryMonth" not in schema:
             msg += "\"expiryMonth\" field is required\n"
-        if "expiryYear" not in payload:
+        if "expiryYear" not in schema:
             msg += "\"expiryYear\" field is required\n"
-        if "currency" not in payload:
+        if "currency" not in schema:
             msg += "\"currency\" field is required\n"
-        if "country" not in payload:
+        if "country" not in schema:
             msg += "\"country\" field is required\n"
-        if "fullName" not in payload:
+        if "fullName" not in schema:
             msg += "\"fullName\" field is required\n"
-        if "paymentType" not in payload:
+        if "paymentType" not in schema:
             msg += "\"paymentType\" field is required\n"
-        if "channelType" not in payload:
+        if "channelType" not in schema:
             msg += "\"channelType\" field is required\n"
-        if "retry" not in payload:
+        if "retry" not in schema:
             msg += "\"retry\" field is required\n"
-        if "paymentReference" not in payload:
+        if "paymentReference" not in schema:
             msg += "\"paymentReference\" field is required\n"
-        if "email" not in payload:
+        if "email" not in schema:
             msg += "\"email\" field is required\n"
         if msg != "":
             is_valid = False
@@ -265,27 +265,27 @@ class CardValidator(object):
 class MobileMoneyValidator(object):
 
     @staticmethod
-    def is_valid_authorize(payload: dict) -> bool:
+    def is_valid_authorize(schema: dict) -> bool:
         msg = ""
         is_valid = True
-        if "publicKey" not in payload:
+        if "publicKey" not in schema:
             msg += "\"publicKey\" field is required\n"
-        if "amount" not in payload:
+        if "amount" not in schema:
             msg += "\"amount\" field is required\n"
-        if "mobileNumber" not in payload:
+        if "mobileNumber" not in schema:
             msg += "\"mobileNumber\" field is required\n"
-        if "currency" not in payload:
+        if "currency" not in schema:
             msg += "\"currency\" field is required\n"
-        if "country" not in payload:
+        if "country" not in schema:
             msg += "\"country\" field is required\n"
-        if "paymentReference" not in payload:
+        if "paymentReference" not in schema:
             msg += "\"paymentReference\" field is required\n"
-        if "paymentType" not in payload:
+        if "paymentType" not in schema:
             msg += "\"paymentType\" field is required\n"
-        if "network" not in payload:
+        if "network" not in schema:
             msg += "\"network\" field is required\n"
-        if payload["network"]:
-            if payload["network"] not in ["AIRTEL", "TIG", "VODAFONE", "MTN"]:
+        if schema["network"]:
+            if schema["network"] not in ["AIRTEL", "TIG", "VODAFONE", "MTN"]:
                 msg += "enter a valid network provider\n"
         if msg != "":
             is_valid = False
@@ -297,25 +297,25 @@ class MobileMoneyValidator(object):
 class OrderValidator(object):
 
     @staticmethod
-    def is_valid_authorize(payload: dict) -> bool:
+    def is_valid_authorize(schema: dict) -> bool:
         msg = ""
         is_valid = True
-        if "publicKey" not in payload:
+        if "publicKey" not in schema:
             msg += "\"publicKey\" field is required\n"
-        if "amount" not in payload:
+        if "amount" not in schema:
             msg += "\"amount\" field is required\n"
-        if "currency" not in payload:
+        if "currency" not in schema:
             msg += "\"currency\" field is required\n"
-        if "country" not in payload:
+        if "country" not in schema:
             msg += "\"country\" field is required\n"
-        if "paymentReference" not in payload:
+        if "paymentReference" not in schema:
             msg += "\"paymentReference\" field is required\n"
-        if "email" not in payload:
+        if "email" not in schema:
             msg += "\"email\" field is required\n"
-        if "orderType" not in payload:
+        if "orderType" not in schema:
             msg += "\"orderType\" field is required\n"
-        if "orders" in payload:
-            for orders in payload["orders"]:
+        if "orders" in schema:
+            for orders in schema["orders"]:
                 if "orderId" not in orders:
                     msg += "\"orderId\" field in \"orders\" element is required\n"
                     break
@@ -329,38 +329,36 @@ class OrderValidator(object):
 class RecurringValidator(object):
 
     @staticmethod
-    def is_valid_create_subscription(payload) -> bool:
+    def is_valid_create_subscription(schema: dict) -> bool:
         msg = ""
         is_valid = True
-        if "publicKey" not in payload:
+        if "publicKey" not in schema:
             msg += "\"publicKey\" field is required\n"
-        if "paymentReference" not in payload:
+        if "paymentReference" not in schema:
             msg += "\"paymentReference\" field is required\n"
-        if "cardNumber" not in payload:
+        if "cardNumber" not in schema:
             msg += "\"cardNumber\" field is required\n"
-        if "expiryMonth" not in payload:
+        if "expiryMonth" not in schema:
             msg += "\"expiryMonth\" field is required\n"
-        if "callbackUrl" not in payload:
+        if "callbackUrl" not in schema:
             msg += "\"callbackUrl\" field is required\n"
-        if "expiryYear" not in payload:
+        if "expiryYear" not in schema:
             msg += "\"expiryYear\" field is required\n"
-        if "cvv" not in payload:
+        if "cvv" not in schema:
             msg += "\"cvv\" field is required\n"
-        if "amount" not in payload:
+        if "amount" not in schema:
             msg += "\"amount\" field is required\n"
-        if "currency" not in payload:
+        if "currency" not in schema:
             msg += "\"currency\" field is required\n"
-        if "country" not in payload:
+        if "country" not in schema:
             msg += "\"country\" field is required\n"
-        if "startDate" not in payload:
+        if "startDate" not in schema:
             msg += "\"startDate\" field is required\n"
-        if "billingCycle" not in payload:
+        if "billingCycle" not in schema:
             msg += "\"billingCycle\" field is required\n"
-        if "email" not in payload:
+        if "email" not in schema:
             msg += "\"email\" field is required\n"
-        # if "customerId" not in payload:
-        #     msg += "\"customerId\" field is required\n"
-        if "billingPeriod" not in payload:
+        if "billingPeriod" not in schema:
             msg += "\"billingPeriod\" field is required\n"
         if msg != "":
             is_valid = False
@@ -369,20 +367,20 @@ class RecurringValidator(object):
         return is_valid
 
     @staticmethod
-    def is_valid_update_subscription(payload) -> bool:
+    def is_valid_update_subscription(schema: dict) -> bool:
         msg = ""
         is_valid = True
-        if "publicKey" not in payload:
+        if "publicKey" not in schema:
             msg += "\"publicKey\" field is required\n"
-        if "amount" not in payload:
+        if "amount" not in schema:
             msg += "\"amount\" field is required\n"
-        if "currency" not in payload:
+        if "currency" not in schema:
             msg += "\"currency\" field is required\n"
-        if "country" not in payload:
+        if "country" not in schema:
             msg += "\"country\" field is required\n"
-        if "mobileNumber" not in payload:
+        if "mobileNumber" not in schema:
             msg += "\"mobileNumber\" field is required\n"
-        if "status" not in payload:
+        if "status" not in schema:
             msg += "\"status\" field is required\n"
         if msg != "":
             is_valid = False
@@ -391,18 +389,18 @@ class RecurringValidator(object):
         return is_valid
 
     @staticmethod
-    def is_valid_recurring_debit(payload) -> bool:
+    def is_valid_recurring_debit(schema: dict) -> bool:
         msg = ""
         is_valid = True
-        if "authorizationCode" not in payload:
+        if "authorizationCode" not in schema:
             msg += "\"authorizationCode\" field is required\n"
-        if "amount" not in payload:
+        if "amount" not in schema:
             msg += "\"amount\" field is required\n"
-        if "currency" not in payload:
+        if "currency" not in schema:
             msg += "\"currency\" field is required\n"
-        if "paymentReference" not in payload:
+        if "paymentReference" not in schema:
             msg += "\"paymentReference\" field is required\n"
-        if "email" not in payload:
+        if "email" not in schema:
             msg += "\"email\" field is required\n"
         if msg != "":
             is_valid = False

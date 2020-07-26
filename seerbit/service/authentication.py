@@ -25,11 +25,23 @@ from seerbit.utility import Utility
 class Authentication(IAuthentication, Service, IClientConstants, INumericConstants):
 
     def __init__(self, client: Client):
+        """
+
+        :param Client client:
+            A non optional Client, the client with config
+
+        """
         super(Authentication, self).__init__(client)
         Utility.non_null(client)
 
     def auth(self):
-        """ POST /api/v2/encrypt/keys """
+        """
+
+        POST /api/v2/encrypt/keys
+
+        :returns Any self.response
+
+        """
         config: Config = self.client.config
         payload: dict = {
             "key": None
@@ -40,6 +52,11 @@ class Authentication(IAuthentication, Service, IClientConstants, INumericConstan
         return self.response
 
     def get_token(self) -> str:
+        """
+
+        :return str encrypted_key
+
+        """
         encrypted_key: str = ""
         if self.response:
             if "data" in self.response:

@@ -56,7 +56,7 @@ def order(token_str: str):
         "callbackUrl": "https://yourdomain.com",
         "country": "NG",
         "currency": "NGN",
-        "amount": "1400",
+        "amount": "140",
         "orders": [
             {
                 "orderId": "22S789420214623",

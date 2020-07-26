@@ -32,6 +32,7 @@ class HttpClient(IHttpClient, INumericConstants):
             else:
                 header = {
                     "Authorization": "Bearer " + token,
+                    "Request-Timeout": str(service.client.timeout),
                     str(HttpHeaderEnum.CONTENT_TYPE_PARAM.value): str(HttpHeaderEnum.CONTENT_TYPE_VALUE.value)
                 }
                 response = post(url=request_url, json=params, headers=header)
@@ -50,11 +51,15 @@ class HttpClient(IHttpClient, INumericConstants):
             else:
                 header = {
                     "Authorization": "Bearer " + token,
+                    "Request-Timeout": str(service.client.timeout),
                     str(HttpHeaderEnum.CONTENT_TYPE_PARAM): str(HttpHeaderEnum.CONTENT_TYPE_VALUE)
                 }
                 response = put(url=request_url, json=params, headers=header)
         else:
-            header = {str(HttpHeaderEnum.CONTENT_TYPE_PARAM.value): str(HttpHeaderEnum.CONTENT_TYPE_VALUE.value)}
+            header = {
+                str(HttpHeaderEnum.CONTENT_TYPE_PARAM.value): str(HttpHeaderEnum.CONTENT_TYPE_VALUE.value),
+                "Request-Timeout": str(service.client.timeout)
+            }
             response = put(url=request_url, json=params, headers=header)
         status_code = int(response.status_code)
         if status_code < self.HTTP_STATUS_200 or status_code > self.HTTP_STATUS_299:
@@ -68,11 +73,15 @@ class HttpClient(IHttpClient, INumericConstants):
             else:
                 header = {
                     "Authorization": "Bearer " + token,
+                    "Request-Timeout": str(service.client.timeout),
                     str(HttpHeaderEnum.CONTENT_TYPE_PARAM.value): str(HttpHeaderEnum.CONTENT_TYPE_VALUE.value)
                 }
                 response = get(url=request_url, headers=header)
         else:
-            header = {str(HttpHeaderEnum.CONTENT_TYPE_PARAM.value): str(HttpHeaderEnum.CONTENT_TYPE_VALUE.value)}
+            header = {
+                str(HttpHeaderEnum.CONTENT_TYPE_PARAM.value): str(HttpHeaderEnum.CONTENT_TYPE_VALUE.value),
+                "Request-Timeout": str(service.client.timeout)
+            }
             response = get(url=request_url, headers=header)
         status_code = int(response.status_code)
         if status_code < self.HTTP_STATUS_200 or status_code > self.HTTP_STATUS_299:
