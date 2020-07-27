@@ -56,7 +56,7 @@ You can contribute to this repository so that anyone can benefit from it:
 You can also check the [src/seerbit/demos](https://github.com/seerbit/)
 ## Using the Library
 
-<strong><h4>Initiate Card Transaction</h4></strong>
+<strong><h4>Initiate Account Option</h4></strong>
 Instantiate a client and set the parameters. 
 
 ```python
