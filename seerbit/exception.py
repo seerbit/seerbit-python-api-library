@@ -31,7 +31,10 @@ class SeerbitError(RuntimeError):
             error_message = error_message.format(str(json_object["message"]), str(json_object["errorCode"]))
             print(error_message)
             raise SeerbitError(str(json_object["message"]),)
-        raise SeerbitError(json_object["message"])
+        elif json_object["message"]:
+            raise SeerbitError(json_object["message"])
+        else:
+            raise SeerbitError("Unknown Error")
 
 
 class SeerbitConnectionError(RuntimeError):
