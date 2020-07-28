@@ -37,7 +37,10 @@ class HttpClient(IHttpClient, INumericConstants):
                 }
                 response = post(url=request_url, json=params, headers=header)
         else:
-            header = {str(HttpHeaderEnum.CONTENT_TYPE_PARAM.value): str(HttpHeaderEnum.CONTENT_TYPE_VALUE.value)}
+            header = {
+                "Request-Timeout": str(service.client.timeout),
+                str(HttpHeaderEnum.CONTENT_TYPE_PARAM.value): str(HttpHeaderEnum.CONTENT_TYPE_VALUE.value)
+            }
             response = post(url=request_url, json=params, headers=header)
         status_code = int(response.status_code)
         if status_code < self.HTTP_STATUS_200 or status_code > self.HTTP_STATUS_299:
