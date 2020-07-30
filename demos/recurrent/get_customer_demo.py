@@ -15,7 +15,6 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
 from seerbit.client import Client
-from seerbit.config import Config
 from seerbit.enums import EnvironmentEnum
 from seerbit.seerbitlib import Seerbit
 from seerbit.service.authentication import Authentication
@@ -30,7 +29,7 @@ def authenticate() -> str:
     client.api_base = Seerbit.LIVE_API_BASE
     client.environment = EnvironmentEnum.LIVE.value
     client.private_key = "public2key"
-client.public_key = "private2key"
+    client.public_key = "private2key"
     client.timeout = 20
     auth_service = Authentication(client)
     auth_service.auth()
