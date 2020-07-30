@@ -52,6 +52,7 @@ client.timeout = 20
 client.authentication_scheme = AuthTypeEnum.BASIC.value
 auth_service = Authentication(client)
 token = auth_service.get_basic_auth_encoded_string()
+
 if token:
     print("card capture payment response: " + str(card_payment_capture(token)))
 else:

@@ -60,6 +60,7 @@ client.timeout = 20
 client.authentication_scheme = AuthTypeEnum.BASIC.value
 auth_service = Authentication(client)
 token = auth_service.get_basic_auth_encoded_string()
+
 if token:
     print("card non 3d charge response: " + str(card_non3d_charge(token)))
 else:

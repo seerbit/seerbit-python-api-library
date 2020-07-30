@@ -57,6 +57,7 @@ client.timeout = 20
 client.authentication_scheme = AuthTypeEnum.BASIC.value
 auth_service = Authentication(client)
 token = auth_service.get_basic_auth_encoded_string()
+
 if token:
     print("card authorize response: " + str(card_preauth(token)))
 else:
