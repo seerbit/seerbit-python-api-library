@@ -46,10 +46,8 @@ def card_payment_capture(token_str: str):
 
 client.api_base = Seerbit.LIVE_API_BASE
 client.environment = EnvironmentEnum.LIVE.value
-config = Config()
-config.put("public_key", "SBTESTPUBK_E9CFg6iZ2uSFr8YK7C2KTontiysQRnMm")
-config.put("private_key", "SBTESTSECK_V1ahfeTQAsyi3OaJXbMmrKNB8KTW5dyCRdUnILnw")
-client.config = config
+client.public_key = "SBTESTPUBK_E9CFg6iZ2uSFr8YK7C2KTontiysQRnMm"
+client.private_key = "SBTESTSECK_V1ahfeTQAsyi3OaJXbMmrKNB8KTW5dyCRdUnILnw"
 client.timeout = 20
 client.authentication_scheme = AuthTypeEnum.BASIC.value
 auth_service = Authentication(client)
