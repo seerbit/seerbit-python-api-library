@@ -26,12 +26,20 @@ class HttpClient(IHttpClient, INumericConstants):
         self.status_code = -20
 
     def post(self, service, request_url, params, token):
+        client = service.client
         if service.requires_token:
             if not token or len(token) < self.MIN_SIZE:
                 raise SeerbitConnectionError("Please provide an authentication token.")
             else:
+                authentication_scheme = client.authentication_scheme
+                if authentication_scheme.lower() == "basic ":
+                    token = "Basic {0}".format(token)
+                elif authentication_scheme.lower() == "bearer ":
+                    token = "Bearer {0}".format(token)
+                else:
+                    raise SeerbitError("Invalid Authentication Scheme")
                 header = {
-                    "Authorization": "Bearer " + token,
+                    "Authorization": token,
                     "Request-Timeout": str(service.client.timeout),
                     str(HttpHeaderEnum.CONTENT_TYPE_PARAM.value): str(HttpHeaderEnum.CONTENT_TYPE_VALUE.value)
                 }
@@ -48,12 +56,20 @@ class HttpClient(IHttpClient, INumericConstants):
         return response
 
     def put(self, service, request_url, params, token):
+        client = service.client
         if service.requires_token:
             if not token or len(token) < self.MIN_SIZE:
                 raise SeerbitConnectionError("Please provide an authentication token.")
             else:
+                authentication_scheme = client.authentication_scheme
+                if authentication_scheme.lower() == "basic ":
+                    token = "Basic {0}".format(token)
+                elif authentication_scheme.lower() == "bearer ":
+                    token = "Bearer {0}".format(token)
+                else:
+                    raise SeerbitError("Invalid Authentication Scheme")
                 header = {
-                    "Authorization": "Bearer " + token,
+                    "Authorization": token,
                     "Request-Timeout": str(service.client.timeout),
                     str(HttpHeaderEnum.CONTENT_TYPE_PARAM): str(HttpHeaderEnum.CONTENT_TYPE_VALUE)
                 }
@@ -70,12 +86,20 @@ class HttpClient(IHttpClient, INumericConstants):
         return response
 
     def get(self, service, request_url, token):
+        client = service.client
         if service.requires_token:
             if not token or len(token) < self.MIN_SIZE:
                 raise SeerbitConnectionError("Please provide an authentication token.")
             else:
+                authentication_scheme = client.authentication_scheme
+                if authentication_scheme.lower() == "basic ":
+                    token = "Basic {0}".format(token)
+                elif authentication_scheme.lower() == "bearer ":
+                    token = "Bearer {0}".format(token)
+                else:
+                    raise SeerbitError("Invalid Authentication Scheme")
                 header = {
-                    "Authorization": "Bearer " + token,
+                    "Authorization": token,
                     "Request-Timeout": str(service.client.timeout),
                     str(HttpHeaderEnum.CONTENT_TYPE_PARAM.value): str(HttpHeaderEnum.CONTENT_TYPE_VALUE.value)
                 }

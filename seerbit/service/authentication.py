@@ -14,6 +14,8 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
+from base64 import b64encode
+from seerbit.exception import SeerbitError
 from seerbit.interface.app_interface import IClientConstants, INumericConstants
 from seerbit.client import Client
 from seerbit.config import Config
@@ -65,3 +67,18 @@ class Authentication(IAuthentication, Service, IClientConstants, INumericConstan
                     encrypted_key_dict = encrypted_key_dict["EncryptedSecKey"]
                     encrypted_key = encrypted_key_dict.get("encryptedKey")
         return encrypted_key
+
+    def get_basic_auth_encoded_string(self) -> str:
+        """
+
+        :return str base 64 encoded string
+
+        """
+        client = self.client
+        authentication_scheme = client.authentication_scheme
+        if authentication_scheme.lower() not in ["basic ", "bearer "]:
+            raise SeerbitError("Set authentication scheme to AuthTypeEnum.BASIC value before calling this method")
+        authorization_str = client.public_key + ":" + client.private_key
+        encoded_bytes = b64encode(authorization_str.encode("utf-8"))
+        encoded_str = str(encoded_bytes, "utf-8")
+        return encoded_str

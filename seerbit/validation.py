@@ -260,8 +260,30 @@ class CardValidator(object):
         return is_valid
 
     @staticmethod
-    def is_valid_payment_charge_3d(payload: dict) -> bool:
+    def is_valid_payment_charge_3d(schema: dict) -> bool:
         return True
+
+    @staticmethod
+    def is_valid_tokenize(schema: dict) -> bool:
+        msg = ""
+        is_valid = True
+        if "publicKey" not in schema:
+            msg += "\"publicKey\" field is required\n"
+        if "cardNumber" not in schema:
+            msg += "\"cardNumber\" field is required\n"
+        if "expiryMonth" not in schema:
+            msg += "\"expiryMonth\" field is required\n"
+        if "expiryYear" not in schema:
+            msg += "\"expiryYear\" field is required\n"
+        if "currency" not in schema:
+            msg += "\"currency\" field is required\n"
+        if "country" not in schema:
+            msg += "\"country\" field is required\n"
+        if msg != "":
+            is_valid = False
+        if not is_valid:
+            raise ValueError(msg)
+        return is_valid
 
 
 class MobileMoneyValidator(object):

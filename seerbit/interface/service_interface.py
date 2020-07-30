@@ -94,6 +94,9 @@ class ICardService(object):
     def payment_charge_3d(self, payment_charge: dict):
         pass
 
+    def tokenize(self, payment_charge: dict):
+        pass
+
 
 # mobile money service
 class IMobileMoneyService(object):

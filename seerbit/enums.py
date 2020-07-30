@@ -30,3 +30,8 @@ class RefundType(Enum):
 class HttpHeaderEnum(Enum):
     CONTENT_TYPE_PARAM = "Content-Type"
     CONTENT_TYPE_VALUE = "application/json"
+
+
+class AuthTypeEnum(Enum):
+    BASIC = "Basic "
+    BEARER = "Bearer "

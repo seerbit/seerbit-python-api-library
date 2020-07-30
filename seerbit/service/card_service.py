@@ -178,6 +178,24 @@ class CardService(Service, ICardService, IClientConstants):
 
         """
         self.requires_token = True
-        CardValidator.is_valid_payment_charge_3d(payload=payment_charge)
+        CardValidator.is_valid_payment_charge_3d(schema=payment_charge)
         self.response = self.post_request(IClientConstants.INITIATE_PAYMENT_ENDPOINT, payment_charge, self.token)
         return self.response
+
+    def tokenize(self, payment_charge: dict):
+        """
+
+        POST /api/v2/payments/tokenize
+
+        :param dict payment_charge:
+            A non optional dict, the payload
+
+        :returns Any self.response
+
+        """
+        self.requires_token = True
+        CardValidator.is_valid_tokenize(schema=payment_charge)
+        self.response = self.post_request(IClientConstants.TOKENIZATION_ENDPOINT, payment_charge, self.token)
+        return self.response
+
+

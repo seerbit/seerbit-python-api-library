@@ -16,29 +16,12 @@
  """
 from random import randint
 from seerbit.client import Client
-from seerbit.config import Config
-from seerbit.enums import EnvironmentEnum
+from seerbit.enums import EnvironmentEnum, AuthTypeEnum
 from seerbit.seerbitlib import Seerbit
 from seerbit.service.authentication import Authentication
 from seerbit.service.card_service import CardService
 
 client = Client()
-
-
-def authenticate() -> str:
-    """ User authentication token """
-    print("================== start authentication ==================")
-    client.api_base = Seerbit.LIVE_API_BASE
-    client.environment = EnvironmentEnum.LIVE.value
-    config = Config()
-    config.put("public_key", "public2key")
-    config.put("private_key", "private2key")
-    client.config = config
-    client.timeout = 20
-    auth_service = Authentication(client)
-    auth_service.auth()
-    print("================== stop authentication ==================")
-    return auth_service.get_token()
 
 
 def card_payment_cancel(token_str: str):
@@ -58,8 +41,14 @@ def card_payment_cancel(token_str: str):
     return json_response
 
 
-token = authenticate()
-
+client.api_base = Seerbit.LIVE_API_BASE
+client.environment = EnvironmentEnum.LIVE.value
+client.private_key = "public2key"
+client.public_key = "private2key"
+client.timeout = 20
+client.authentication_scheme = AuthTypeEnum.BASIC.value
+auth_service = Authentication(client)
+token = auth_service.get_basic_auth_encoded_string()
 if token:
     print("card cancel payment response: " + str(card_payment_cancel(token)))
 else:

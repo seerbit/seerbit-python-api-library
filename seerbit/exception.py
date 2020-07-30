@@ -27,10 +27,14 @@ class SeerbitError(RuntimeError):
     def handle_error(response: Response):
         json_object = response.json()
         error_message = "{0}: {1}"
-        if json_object["message"] and json_object.get("errorCode"):
+        if json_object.get("status") and json_object.get("data"):
+            status = json_object["status"]
+            if status.lower() == "error":
+                raise SeerbitError(json_object["data"]["message"])
+        if json_object.get("message") and json_object.get("errorCode"):
             error_message = error_message.format(str(json_object["message"]), str(json_object["errorCode"]))
             print(error_message)
-            raise SeerbitError(str(json_object["message"]),)
+            raise SeerbitError(str(json_object["message"]))
         elif json_object["message"]:
             raise SeerbitError(json_object["message"])
         else:

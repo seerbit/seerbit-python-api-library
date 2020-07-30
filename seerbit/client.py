@@ -16,7 +16,7 @@
  """
 from seerbit.config import Config
 from seerbit.interface.app_interface import IClientConstants
-from seerbit.enums import EnvironmentEnum
+from seerbit.enums import EnvironmentEnum, AuthTypeEnum
 from seerbit.exception import SeerbitError
 
 
@@ -24,6 +24,7 @@ class Client:
 
     def __init__(self, version=None):
         self.config = Config()
+        self.config.put("authentication_scheme", str(AuthTypeEnum.BEARER.value))
         if version is None:
             self.config.put("version", IClientConstants.VERSION_TWO)
         else:
@@ -86,6 +87,21 @@ class Client:
             msg = "This environment does not exist, use \"{0}\" or \"{1}\""
             error_message = msg.format(EnvironmentEnum.LIVE.value, EnvironmentEnum.TEST.value)
             raise SeerbitError(error_message)
+
+    @property
+    def authentication_scheme(self):
+        auth_type: str = ""
+        if self.config.get("authentication_scheme") is not None:
+            auth_type = str(self.config.get("authentication_scheme"))
+        return auth_type
+
+    @authentication_scheme.setter
+    def authentication_scheme(self, auth_type: str):
+        auth_type: str = auth_type.lower()
+        if auth_type in ["basic ", "bearer "]:
+            self.config.put("authentication_scheme", auth_type)
+        else:
+            raise SeerbitError("Invalid Authentication Scheme")
 
     @property
     def api_base(self):

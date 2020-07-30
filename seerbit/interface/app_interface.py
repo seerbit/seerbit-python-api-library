@@ -83,6 +83,7 @@ class IClientConstants(object):
     PAYMENT_REFUND_ENDPOINT = "api/v2/payments/refund"
     PAYMENT_CANCEL_ENDPOINT = "api/v2/payments/cancel"
     PAYMENT_CHARGE_ENDPOINT = "api/v2/payments/charge"
+    TOKENIZATION_ENDPOINT = "api/v2/payments/tokenize"
 
     # refunds
     REFUND_ENDPOINT = "merchants/api/v1/user/{0}/refunds"
