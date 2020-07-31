@@ -54,20 +54,20 @@ class CardService(Service, ICardService, IClientConstants):
         self.response = self.post_request(IClientConstants.INITIATE_PAYMENT_ENDPOINT, card, self.token)
         return self.response
 
-    def validate(self, transaction: dict):
+    def validate(self, otp: dict):
         """
 
         POST /api/v2/payments/otp
 
-        :param dict transaction:
+        :param dict otp:
             A non optional dict, the payload
 
         :returns Any self.response
 
         """
         self.requires_token = True
-        CardValidator.is_valid_validate(schema=transaction)
-        self.response = self.post_request(IClientConstants.VALIDATE_CARD_PAYMENT_ENDPOINT, transaction, self.token)
+        CardValidator.is_valid_validate(schema=otp)
+        self.response = self.post_request(IClientConstants.VALIDATE_CARD_PAYMENT_ENDPOINT, otp, self.token)
         return self.response
 
     def preauth_authorization(self, card_pre_auth: dict):
@@ -197,5 +197,3 @@ class CardService(Service, ICardService, IClientConstants):
         CardValidator.is_valid_tokenize(schema=payment_charge)
         self.response = self.post_request(IClientConstants.TOKENIZATION_ENDPOINT, payment_charge, self.token)
         return self.response
-
-
