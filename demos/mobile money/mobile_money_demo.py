@@ -30,8 +30,8 @@ def authenticate() -> str:
     print("================== start authentication ==================")
     client.api_base = Seerbit.LIVE_API_BASE
     client.environment = EnvironmentEnum.LIVE.value
-    client.private_key = "public2key"
-    client.public_key = "private2key"
+    client.private_key = "private_key"
+    client.public_key = "public_key"
     client.timeout = 20
     auth_service = Authentication(client)
     auth_service.auth()
