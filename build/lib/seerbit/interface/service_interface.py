@@ -141,13 +141,13 @@ class IRecurringService(object):
     def get_customer_subscriptions(self, public_key, customer_id):
         pass
 
-    def update_subscription(self, subscription):
+    def update_subscription(self, subscription: dict):
         pass
 
     def get_merchant_subscriptions(self, public_key):
         pass
 
-    def recurring_debit(self, recurring_debit):
+    def recurring_debit(self, recurring_debit: dict):
         pass
 
 
@@ -161,4 +161,14 @@ class IRefundService(object):
         pass
 
     def refund(self, business_id, payload):
+        pass
+
+
+# standard checkout service
+class IStandardCheckoutService(object):
+
+    def initialize_transaction(self, standard_checkout: dict):
+        pass
+
+    def get_hash(self, standard_checkout: dict) -> str:
         pass

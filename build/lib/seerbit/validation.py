@@ -467,3 +467,34 @@ class RecurringValidator(object):
         if not is_valid:
             raise ValueError(msg)
         return is_valid
+
+
+class StandardCheckoutValidator(object):
+
+    @staticmethod
+    def is_valid_checkout(schema: dict) -> bool:
+        msg = ""
+        is_valid = True
+        if "publicKey" not in schema:
+            msg += "\"publicKey\" field is required\n"
+        if "paymentReference" not in schema:
+            msg += "\"paymentReference\" field is required\n"
+        if "callbackUrl" not in schema:
+            msg += "\"callbackUrl\" field is required\n"
+        if "amount" not in schema:
+            msg += "\"amount\" field is required\n"
+        if "currency" not in schema:
+            msg += "\"currency\" field is required\n"
+        if "country" not in schema:
+            msg += "\"country\" field is required\n"
+        if "email" not in schema:
+            msg += "\"email\" field is required\n"
+        if "productId" not in schema:
+            msg += "\"productId\" field is required\n"
+        if "productDescription" not in schema:
+            msg += "\"productDescription\" field is required\n"
+        if msg != "":
+            is_valid = False
+        if not is_valid:
+            raise ValueError(msg)
+        return is_valid
