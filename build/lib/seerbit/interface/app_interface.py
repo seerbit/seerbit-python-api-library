@@ -73,10 +73,8 @@ class IClientConstants(object):
 
     # authentication
     AUTHENTICATION_ENDPOINT = "api/v2/encrypt/keys"
-    HASH_REQUEST = "api/v2/encrypt/hashs"
 
     # bank & card payment options
-    INITIALIZE_TRANSACTIONS = "api/v2/payments"
     INITIATE_PAYMENT_ENDPOINT = "api/v2/payments/initiates"
     VALIDATE_PAYMENT_ENDPOINT = "api/v2/payments/validate"
     VALIDATE_CARD_PAYMENT_ENDPOINT = "api/v2/payments/otp"
