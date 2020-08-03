@@ -18,7 +18,6 @@ from seerbit.client import Client
 from seerbit.enums import EnvironmentEnum
 from seerbit.seerbitlib import Seerbit
 from seerbit.service.authentication import Authentication
-from seerbit.service.resource_service import ResourceService
 from seerbit.service.standard_checkout_service import StandardCheckoutService
 
 client = Client()
