@@ -68,7 +68,7 @@ class IConfig(object):
 
 class IClientConstants(object):
     # base url
-    TEST_API_BASE = "https://stg-backend.seerbitapi.com/"
+    TEST_API_BASE = "https://pilot-backend.seerbitapi.com/"
     LIVE_API_BASE = "https://seerbitapi.com/"
 
     # authentication
