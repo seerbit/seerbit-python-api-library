@@ -53,7 +53,7 @@ You can contribute to this repository so that anyone can benefit from it:
 
 ## Examples  
 
-You can also check the [src/seerbit/demos](https://github.com/seerbit/)
+You can also check the [demos](https://github.com/seerbit/seerbit-python-api-library/tree/master/demos)
 ## Using the Library
 
 <strong><h4>Initiate Account Option</h4></strong>
@@ -118,7 +118,7 @@ After you have retrieved your token, pass it to the AccountService constructor a
     json_response = account_service.authorize(account_payload)
 ``` 
 
-Find more examples [here](https://github.com/seerbit/).
+Find more examples [here](https://github.com/seerbit/seerbit-python-api-library/tree/master/demos).
 
 ## Licence
 GNU General Public License. For more information, see the LICENSE file.
