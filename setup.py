@@ -5,7 +5,7 @@ with open("README.md", "r") as file:
 
 setuptools.setup(
     name="seerbit-python-v2",
-    version="1.0.1",
+    version="1.0.2",
     author="Seerbit",
     author_email="developers@seerbit.com",
     description="A Seerbit API Library for Python (Version 2)",
