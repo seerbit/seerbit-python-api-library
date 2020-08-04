@@ -5,13 +5,13 @@ with open("README.md", "r") as file:
 
 setuptools.setup(
     name="seerbit-python-v2",
-    version="1.0.2",
+    version="1.0.0",
     author="Seerbit",
     author_email="developers@seerbit.com",
-    description="A Seerbit API Library for Python (Version 2)",
+    description="A Seerbit API Library for Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/pypa/sampleproject",
+    url="https://github.com/seerbit/seerbit-python-api-library",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
