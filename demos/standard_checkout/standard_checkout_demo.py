@@ -14,6 +14,8 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
+import hashlib
+
 from seerbit.client import Client
 from seerbit.enums import EnvironmentEnum
 from seerbit.seerbitlib import Seerbit
@@ -28,8 +30,8 @@ def authenticate() -> str:
     print("================== start authentication ==================")
     client.api_base = Seerbit.LIVE_API_BASE
     client.environment = EnvironmentEnum.LIVE.value
-    client.private_key = "private_key"
-    client.public_key = "public_key"
+    client.private_key = "SBTESTSECK_kFgKytQK1KSvbR616rUMqNYOUedK3Btm5igZgxaZ"
+    client.public_key = "SBTESTPUBK_p8GqvFSFNCBahSJinczKd9aIPoRUZfda"
     client.timeout = 20
     auth_service = Authentication(client)
     auth_service.auth()
@@ -44,9 +46,9 @@ def initialize_transaction(token_str: str):
     hash_payload = {
         "publicKey": client.public_key,
         "amount": "100.00",
-        "currency": "KES",
-        "country": "KE",
-        "paymentReference": "643108207791261657324A3",
+        "currency": "NGN",
+        "country": "NG",
+        "paymentReference": "643108207791261657324A3A",
         "email": "test@yourdomain.com",
         "productId": "productID",
         "productDescription": "WEIGHING AND ADMIN CHARGES",
@@ -56,9 +58,42 @@ def initialize_transaction(token_str: str):
     standard_checkout_payload = {
         "publicKey": client.public_key,
         "amount": "100.00",
-        "currency": "KES",
-        "country": "KE",
-        "paymentReference": "643108207791261657324A3",
+        "currency": "NGN",
+        "country": "NG",
+        "paymentReference": "643108207791261657324A3A",
+        "email": "test@yourdomain.com",
+        "productId": "productID",
+        "productDescription": "WEIGHING AND ADMIN CHARGES",
+        "callbackUrl": "http://yourdomain.com",
+        "hash": hash_str,
+        "hashType": "sha256"
+    }
+    json_response = standard_checkout_service.initialize_transaction(standard_checkout_payload)
+    print("================== stop initialize transaction ==================")
+    return json_response
+
+
+def sha256(hash_string: str) -> str:
+    """ Build Hash Signature """
+    sha_signature = hashlib.sha256(hash_string.encode()).hexdigest()
+    return sha_signature
+
+
+def initialize_transaction_with_manual_hash(token_str: str):
+    """ Initialize Transaction With Manual Hash """
+    print("================== start initialize transaction ==================")
+    standard_checkout_service = StandardCheckoutService(client, token_str)
+    hash_payload = 'amount=100.00&callbackUrl=http://yourdomain.com&country=NG&currency=NGN' \
+                   + '&email=test@yourdomain.com&paymentReference=643108207791261657324A333' \
+                   + '&productDescription=WEIGHING AND ADMIN CHARGES&productId=productID&publicKey=' \
+                   + client.public_key + client.private_key
+    hash_str = sha256(hash_payload)
+    standard_checkout_payload = {
+        "publicKey": client.public_key,
+        "amount": "100.00",
+        "currency": "NGN",
+        "country": "NG",
+        "paymentReference": "643108207791261657324A333",
         "email": "test@yourdomain.com",
         "productId": "productID",
         "productDescription": "WEIGHING AND ADMIN CHARGES",
@@ -75,5 +110,6 @@ token = authenticate()
 
 if token:
     print("standard checkout response: " + str(initialize_transaction(token)))
+    print("standard checkout response (manual hash): " + str(initialize_transaction_with_manual_hash(token)))
 else:
     print("authentication failure")

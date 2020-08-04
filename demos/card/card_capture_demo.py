@@ -16,7 +16,6 @@
  """
 from random import randint
 from seerbit.client import Client
-from seerbit.config import Config
 from seerbit.enums import EnvironmentEnum, AuthTypeEnum
 from seerbit.seerbitlib import Seerbit
 from seerbit.service.authentication import Authentication
