@@ -1,8 +1,8 @@
 Metadata-Version: 2.1
 Name: seerbit-python-v2
-Version: 1.0
-Summary: A Seerbit API Library for Python (Version 2)
-Home-page: https://github.com/pypa/sampleproject
+Version: 1.0.0
+Summary: A Seerbit API Library for Python
+Home-page: https://github.com/seerbit/seerbit-python-api-library
 Author: Seerbit
 Author-email: developers@seerbit.com
 License: UNKNOWN
