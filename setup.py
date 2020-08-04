@@ -15,8 +15,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: GNU License",
-        "Fintech :: Finance",
+        "License :: OSI Approved :: GNU License"
     ],
     python_requires='>=3.7',
 )
