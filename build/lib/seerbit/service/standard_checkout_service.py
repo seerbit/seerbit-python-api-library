@@ -59,7 +59,7 @@ class StandardCheckoutService(Service, IStandardCheckoutService, IClientConstant
     def get_hash(self, standard_checkout: dict) -> str:
         """
 
-        POST api/v2/encrypt/hashs
+        POST /api/v2/encrypt/hashs
 
         :param dict standard_checkout:
             A non optional dict, the payload

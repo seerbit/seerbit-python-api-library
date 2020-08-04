@@ -136,7 +136,5 @@ Description:
         
 Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
-Classifier: License :: OSI Approved :: GNU License
-Classifier: Fintech :: Finance
 Requires-Python: >=3.7
 Description-Content-Type: text/markdown
