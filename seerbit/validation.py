@@ -1,5 +1,5 @@
 """
-  Copyright (C) 2020 Seerbit
+  Copyright (C) 2022 SeerBit
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -14,6 +14,78 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
+
+
+class TransferValidator(object):
+
+    @staticmethod
+    def is_valid_payment_transfer(schema: dict) -> bool:
+        msg = ""
+        is_valid = True
+        if "publicKey" not in schema:
+            msg += "\"publicKey\" field is required\n"
+        if "amount" not in schema:
+            msg += "\"amount\" field is required\n"
+        if "currency" not in schema:
+            msg += "\"currency\" field is required\n"
+        if "country" not in schema:
+            msg += "\"country\" field is required\n"
+        if "paymentReference" not in schema:
+            msg += "\"paymentReference\" field is required\n"
+        if "email" not in schema:
+            msg += "\"email\" field is required\n"
+        if "mobileNumber" not in schema:
+            msg += "\"mobileNumber\" field is required\n"
+        if "callbackUrl" not in schema:
+            msg += "\"callbackUrl\" field is required\n"
+        if "redirectUrl" not in schema:
+            msg += "\"redirectUrl\" field is required\n"
+        if "fullName" not in schema:
+            msg += "\"fullName\" field is required\n"
+        if "paymentType" not in schema:
+            msg += "\"paymentType\" field is required\n"
+            if schema["paymentType"] != "TRANSFER":
+                msg += "\"paymentType\" field must be set as \"TRANSFER\""
+        if msg != "":
+            is_valid = False
+        if not is_valid:
+            raise ValueError(msg)
+        return is_valid
+
+
+class UssdValidator(object):
+
+    @staticmethod
+    def is_valid_payment_ussd(schema: dict) -> bool:
+        msg = ""
+        is_valid = True
+        if "publicKey" not in schema:
+            msg += "\"publicKey\" field is required\n"
+        if "amount" not in schema:
+            msg += "\"amount\" field is required\n"
+        if "currency" not in schema:
+            msg += "\"currency\" field is required\n"
+        if "country" not in schema:
+            msg += "\"country\" field is required\n"
+        if "paymentReference" not in schema:
+            msg += "\"paymentReference\" field is required\n"
+        if "email" not in schema:
+            msg += "\"email\" field is required\n"
+        if "mobileNumber" not in schema:
+            msg += "\"mobileNumber\" field is required\n"
+        if "bankCode" not in schema:
+            msg += "\"bankCode\" field is required\n"
+        if "callbackUrl" not in schema:
+            msg += "\"callbackUrl\" field is required\n"
+        if "redirectUrl" not in schema:
+            msg += "\"redirectUrl\" field is required\n"
+        if "fullName" not in schema:
+            msg += "\"fullName\" field is required\n"
+        if msg != "":
+            is_valid = False
+        if not is_valid:
+            raise ValueError(msg)
+        return is_valid
 
 
 class AccountValidator(object):

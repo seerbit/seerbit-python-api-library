@@ -1,5 +1,5 @@
 """
-  Copyright (C) 2020 Seerbit
+  Copyright (C) 2022 SeerBit
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -26,6 +26,18 @@ class IRequest(object):
         pass
 
     def get_request(self, endpoint, token):
+        pass
+
+
+class IUssdService(object):
+
+    def payment_ussd(self, payload):
+        pass
+
+
+class ITransferService(object):
+
+    def payment_transfer(self, payload):
         pass
 
 

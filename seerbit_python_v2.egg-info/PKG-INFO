@@ -1,9 +1,9 @@
 Metadata-Version: 2.1
 Name: seerbit-python-v2
 Version: 1.0.0
-Summary: A Seerbit API Library for Python
+Summary: A SeerBit API Library for Python
 Home-page: https://github.com/seerbit/seerbit-python-api-library
-Author: Seerbit
+Author: SeerBit
 Author-email: developers@seerbit.com
 License: UNKNOWN
 Description: 
@@ -17,7 +17,7 @@ Description:
         </h1>
         
         <h4 align="center">
-          A Seerbit API Library for Python (Version 2)
+          A SeerBit API Library for Python (Version 2)
         </h4>
         
         ## Features
@@ -70,10 +70,10 @@ Description:
         ```python
             from seerbit.client import Client
             from seerbit.enums import EnvironmentEnum
-            from seerbit.seerbitlib import Seerbit
+            from seerbit.seerbitlib import SeerBit
             
             client = Client()
-            client.api_base = Seerbit.LIVE_API_BASE
+            client.api_base = SeerBit.LIVE_API_BASE
             client.environment = EnvironmentEnum.LIVE.value
             client.private_key = "private_key"
             client.public_key = "public_key"

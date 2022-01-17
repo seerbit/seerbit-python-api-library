@@ -16,30 +16,36 @@
  """
 from random import randint
 from seerbit.client import Client
-from seerbit.enums import EnvironmentEnum, AuthTypeEnum
+from seerbit.enums import EnvironmentEnum
 from seerbit.seerbitlib import SeerBit
 from seerbit.service.authentication import Authentication
-from seerbit.service.card_service import CardService
+from seerbit.service.ussd_service import UssdService
 
 client = Client()
 
 
-def card_payment_refund(token_str: str):
-    """ Initiate Card Payment Refund """
-    print("================== start card payment refund ==================")
+def ussd(token_str: str):
+    """ Initiate USSD """
+    print("================== start ussd ==================")
     random_number = randint(10000000, 99999999)
     payment_ref = "SBT_" + str(random_number)
-    card_payload = {
+    ussd_payload = {
         "paymentReference": payment_ref,
         "publicKey": client.public_key,
-        "currency": "KES",
-        "country": "KE",
-        "productDescription": "test refund",
-        "amount": "100.00"
+        "currency": "NGN",
+        "country": "NG",
+        "amount": "100.00",
+        "email": "johndoe@gmail.com",
+        "fullName": "john doe",
+        "paymentType": "USSD",
+        "bankCode": "044",
+        "mobileNumber": "08087522256",
+        "callbackUrl": "http://checkout-seerbit.surge.sh",
+        "redirectUrl": "http://checkout-seerbit.surge.sh"
     }
-    card_service = CardService(client, token_str)
-    json_response = card_service.payment_refund(card_payload)
-    print("================== stop card payment refund ==================")
+    ussd_service = UssdService(client, token_str)
+    json_response = ussd_service.payment_ussd(ussd_payload)
+    print("================== stop ussd ==================")
     return json_response
 
 
@@ -48,11 +54,11 @@ client.environment = EnvironmentEnum.LIVE.value
 client.private_key = "private_key"
 client.public_key = "public_key"
 client.timeout = 20
-client.authentication_scheme = AuthTypeEnum.BASIC.value
 auth_service = Authentication(client)
-token = auth_service.get_basic_auth_encoded_string()
+auth_service.auth()
+token = auth_service.get_token()
 
 if token:
-    print("card refund payment response: " + str(card_payment_refund(token)))
+    print("ussd response: " + str(ussd(token)))
 else:
     print("authentication failure")

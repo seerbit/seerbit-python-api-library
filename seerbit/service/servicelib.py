@@ -1,5 +1,5 @@
 """
-  Copyright (C) 2020 Seerbit
+  Copyright (C) 2022 SeerBit
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
  """
 from seerbit.client import Client
 from seerbit.enums import EnvironmentEnum
-from seerbit.exception import SeerbitError
+from seerbit.exception import SeerBitError
 from seerbit.httpclient import HttpClient
 from seerbit.interface.service_interface import IService, IRequest
 from seerbit.utility import Utility
@@ -41,13 +41,13 @@ class Service(IService, IRequest):
         if not client.config.get("environment"):
             msg = "Client does not have correct environment. Use {0} or {1}"
             self.message = msg.format(EnvironmentEnum.LIVE.value, EnvironmentEnum.TEST.value)
-            raise SeerbitError(self.message)
+            raise SeerBitError(self.message)
         if not client.config.get("public_key"):
             self.message = "Client doesn\'t have a merchant public key. Set a public key using the client"
-            raise SeerbitError(self.message)
+            raise SeerBitError(self.message)
         if not client.config.get("private_key"):
             self.message = "Client doesn\'t have a merchant private key. Set a private key using the client"
-            raise SeerbitError(self.message)
+            raise SeerBitError(self.message)
         self.http_client = HttpClient()
         Service._client = client
 

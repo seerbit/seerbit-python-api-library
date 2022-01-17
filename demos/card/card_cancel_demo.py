@@ -1,5 +1,5 @@
 """
-  Copyright (C) 2020 Seerbit
+  Copyright (C) 2022 SeerBit
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 from random import randint
 from seerbit.client import Client
 from seerbit.enums import EnvironmentEnum, AuthTypeEnum
-from seerbit.seerbitlib import Seerbit
+from seerbit.seerbitlib import SeerBit
 from seerbit.service.authentication import Authentication
 from seerbit.service.card_service import CardService
 
@@ -41,7 +41,7 @@ def card_payment_cancel(token_str: str):
     return json_response
 
 
-client.api_base = Seerbit.LIVE_API_BASE
+client.api_base = SeerBit.LIVE_API_BASE
 client.environment = EnvironmentEnum.LIVE.value
 client.private_key = "private_key"
 client.public_key = "public_key"

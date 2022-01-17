@@ -1,5 +1,5 @@
 """
-  Copyright (C) 2020 Seerbit
+  Copyright (C) 2022 SeerBit
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
  """
 from seerbit.interface.app_interface import IHttpClient, INumericConstants
 from seerbit.enums import HttpHeaderEnum
-from seerbit.exception import SeerbitConnectionError, SeerbitError
+from seerbit.exception import SeerBitConnectionError, SeerBitError
 from requests import post, get, put
 
 
@@ -29,7 +29,7 @@ class HttpClient(IHttpClient, INumericConstants):
         client = service.client
         if service.requires_token:
             if not token or len(token) < self.MIN_SIZE:
-                raise SeerbitConnectionError("Please provide an authentication token.")
+                raise SeerBitConnectionError("Please provide an authentication token.")
             else:
                 authentication_scheme = client.authentication_scheme
                 if authentication_scheme.lower() == "basic ":
@@ -37,7 +37,7 @@ class HttpClient(IHttpClient, INumericConstants):
                 elif authentication_scheme.lower() == "bearer ":
                     token = "Bearer {0}".format(token)
                 else:
-                    raise SeerbitError("Invalid Authentication Scheme")
+                    raise SeerBitError("Invalid Authentication Scheme")
                 header = {
                     "Authorization": token,
                     "Request-Timeout": str(service.client.timeout),
@@ -52,14 +52,14 @@ class HttpClient(IHttpClient, INumericConstants):
             response = post(url=request_url, json=params, headers=header)
         status_code = int(response.status_code)
         if status_code < self.HTTP_STATUS_200 or status_code > self.HTTP_STATUS_299:
-            SeerbitError.handle_error(response)
+            SeerBitError.handle_error(response)
         return response
 
     def put(self, service, request_url, params, token):
         client = service.client
         if service.requires_token:
             if not token or len(token) < self.MIN_SIZE:
-                raise SeerbitConnectionError("Please provide an authentication token.")
+                raise SeerBitConnectionError("Please provide an authentication token.")
             else:
                 authentication_scheme = client.authentication_scheme
                 if authentication_scheme.lower() == "basic ":
@@ -67,7 +67,7 @@ class HttpClient(IHttpClient, INumericConstants):
                 elif authentication_scheme.lower() == "bearer ":
                     token = "Bearer {0}".format(token)
                 else:
-                    raise SeerbitError("Invalid Authentication Scheme")
+                    raise SeerBitError("Invalid Authentication Scheme")
                 header = {
                     "Authorization": token,
                     "Request-Timeout": str(service.client.timeout),
@@ -82,14 +82,14 @@ class HttpClient(IHttpClient, INumericConstants):
             response = put(url=request_url, json=params, headers=header)
         status_code = int(response.status_code)
         if status_code < self.HTTP_STATUS_200 or status_code > self.HTTP_STATUS_299:
-            SeerbitError.handle_error(response)
+            SeerBitError.handle_error(response)
         return response
 
     def get(self, service, request_url, token):
         client = service.client
         if service.requires_token:
             if not token or len(token) < self.MIN_SIZE:
-                raise SeerbitConnectionError("Please provide an authentication token.")
+                raise SeerBitConnectionError("Please provide an authentication token.")
             else:
                 authentication_scheme = client.authentication_scheme
                 if authentication_scheme.lower() == "basic ":
@@ -97,7 +97,7 @@ class HttpClient(IHttpClient, INumericConstants):
                 elif authentication_scheme.lower() == "bearer ":
                     token = "Bearer {0}".format(token)
                 else:
-                    raise SeerbitError("Invalid Authentication Scheme")
+                    raise SeerBitError("Invalid Authentication Scheme")
                 header = {
                     "Authorization": token,
                     "Request-Timeout": str(service.client.timeout),
@@ -112,5 +112,5 @@ class HttpClient(IHttpClient, INumericConstants):
             response = get(url=request_url, headers=header)
         status_code = int(response.status_code)
         if status_code < self.HTTP_STATUS_200 or status_code > self.HTTP_STATUS_299:
-            SeerbitError.handle_error(response)
+            SeerBitError.handle_error(response)
         return response

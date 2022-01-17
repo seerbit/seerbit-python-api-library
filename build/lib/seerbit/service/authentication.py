@@ -1,5 +1,5 @@
 """
-  Copyright (C) 2020 Seerbit
+  Copyright (C) 2022 SeerBit
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
 from base64 import b64encode
-from seerbit.exception import SeerbitError
+from seerbit.exception import SeerBitError
 from seerbit.interface.app_interface import IClientConstants, INumericConstants
 from seerbit.client import Client
 from seerbit.config import Config
@@ -77,7 +77,7 @@ class Authentication(IAuthentication, Service, IClientConstants, INumericConstan
         client = self.client
         authentication_scheme = client.authentication_scheme
         if authentication_scheme.lower() not in ["basic ", "bearer "]:
-            raise SeerbitError("Set authentication scheme to AuthTypeEnum.BASIC value before calling this method")
+            raise SeerBitError("Set authentication scheme to AuthTypeEnum.BASIC value before calling this method")
         authorization_str = client.public_key + ":" + client.private_key
         encoded_bytes = b64encode(authorization_str.encode("utf-8"))
         encoded_str = str(encoded_bytes, "utf-8")

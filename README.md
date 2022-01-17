@@ -9,7 +9,7 @@
 </h1>
 
 <h4 align="center">
-  A Seerbit API Library for Python (Version 2)
+  A SeerBit API Library for Python (Version 2)
 </h4>
 
 ## Features
@@ -62,10 +62,10 @@ Instantiate a client and set the parameters.
 ```python
     from seerbit.client import Client
     from seerbit.enums import EnvironmentEnum
-    from seerbit.seerbitlib import Seerbit
+    from seerbit.seerbitlib import SeerBit
     
     client = Client()
-    client.api_base = Seerbit.LIVE_API_BASE
+    client.api_base = SeerBit.LIVE_API_BASE
     client.environment = EnvironmentEnum.LIVE.value
     client.private_key = "private_key"
     client.public_key = "public_key"

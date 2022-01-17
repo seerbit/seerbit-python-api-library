@@ -1,5 +1,5 @@
 """
-  Copyright (C) 2020 Seerbit
+  Copyright (C) 2022 SeerBit
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -17,11 +17,11 @@
 from requests import Response
 
 
-class SeerbitError(RuntimeError):
+class SeerBitError(RuntimeError):
 
     def __init__(self, message=""):
         self.message = message
-        super(SeerbitError, self).__init__(message)
+        super(SeerBitError, self).__init__(message)
 
     @staticmethod
     def handle_error(response: Response):
@@ -30,22 +30,22 @@ class SeerbitError(RuntimeError):
         if json_object.get("status") and json_object.get("data"):
             status = json_object["status"]
             if status.lower() == "error":
-                raise SeerbitError(json_object["data"]["message"])
+                raise SeerBitError(json_object["data"]["message"])
         if json_object.get("message") and json_object.get("errorCode"):
             error_message = error_message.format(str(json_object["message"]), str(json_object["errorCode"]))
             print(error_message)
-            raise SeerbitError(str(json_object["message"]))
+            raise SeerBitError(str(json_object["message"]))
         elif json_object["message"]:
-            raise SeerbitError(json_object["message"])
+            raise SeerBitError(json_object["message"])
         else:
-            raise SeerbitError("Unknown Error")
+            raise SeerBitError("Unknown Error")
 
 
-class SeerbitConnectionError(RuntimeError):
+class SeerBitConnectionError(RuntimeError):
 
     def __init__(self, message="", code=0, status=None, timestamp=None):
         self.message = message
         self.code = code
         self.status = status
         self.timestamp = timestamp
-        super(SeerbitConnectionError, self).__init__(message, code, status, timestamp)
+        super(SeerBitConnectionError, self).__init__(message, code, status, timestamp)

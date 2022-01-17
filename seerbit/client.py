@@ -1,5 +1,5 @@
 """
-  Copyright (C) 2020 Seerbit
+  Copyright (C) 2022 SeerBit
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -17,7 +17,7 @@
 from seerbit.config import Config
 from seerbit.interface.app_interface import IClientConstants
 from seerbit.enums import EnvironmentEnum, AuthTypeEnum
-from seerbit.exception import SeerbitError
+from seerbit.exception import SeerBitError
 
 
 class Client:
@@ -31,7 +31,7 @@ class Client:
             if "1.0.1" == version:
                 self.config.put("version", IClientConstants.VERSION_TWO)
             else:
-                raise SeerbitError("Version must be \"1.0.1\"")
+                raise SeerBitError("Version must be \"1.0.1\"")
 
     @property
     def config(self):
@@ -66,7 +66,7 @@ class Client:
         if "1.0.1" == version:
             self._config.put("version", IClientConstants.VERSION_TWO)
         else:
-            raise SeerbitError("Version must be \"1.0.1\"")
+            raise SeerBitError("Version must be \"1.0.1\"")
 
     @property
     def environment(self):
@@ -86,7 +86,7 @@ class Client:
         else:
             msg = "This environment does not exist, use \"{0}\" or \"{1}\""
             error_message = msg.format(EnvironmentEnum.LIVE.value, EnvironmentEnum.TEST.value)
-            raise SeerbitError(error_message)
+            raise SeerBitError(error_message)
 
     @property
     def authentication_scheme(self):
@@ -101,7 +101,7 @@ class Client:
         if auth_type in ["basic ", "bearer "]:
             self.config.put("authentication_scheme", auth_type)
         else:
-            raise SeerbitError("Invalid Authentication Scheme")
+            raise SeerBitError("Invalid Authentication Scheme")
 
     @property
     def api_base(self):

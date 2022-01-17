@@ -1,5 +1,5 @@
 """
-  Copyright (C) 2020 Seerbit
+  Copyright (C) 2022 SeerBit
  
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
 from seerbit.client import Client
-from seerbit.exception import SeerbitError
+from seerbit.exception import SeerBitError
 
 
 class Utility:
@@ -23,9 +23,9 @@ class Utility:
     @staticmethod
     def non_null(client: Client):
         if not client:
-            raise SeerbitError("Client cannot be null")
+            raise SeerBitError("Client cannot be null")
 
     @staticmethod
     def require_non_null(api_base, error_message):
         if not api_base:
-            raise SeerbitError(error_message)
+            raise SeerBitError(error_message)

@@ -1,5 +1,5 @@
 """
-  Copyright (C) 2020 Seerbit
+  Copyright (C) 2022 SeerBit
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
 from seerbit.client import Client
-from seerbit.exception import SeerbitError
+from seerbit.exception import SeerBitError
 from seerbit.interface.app_interface import IClientConstants
 from seerbit.interface.service_interface import IStandardCheckoutService
 from seerbit.service.servicelib import Service
@@ -75,7 +75,7 @@ class StandardCheckoutService(Service, IStandardCheckoutService, IClientConstant
             if response.get("hash"):
                 hash_str = response["hash"]["hash"]
             else:
-                raise SeerbitError("Unable to obtain hash")
+                raise SeerBitError("Unable to obtain hash")
         else:
-            raise SeerbitError("Unable to obtain hash")
+            raise SeerBitError("Unable to obtain hash")
         return hash_str

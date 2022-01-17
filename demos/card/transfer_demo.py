@@ -16,30 +16,35 @@
  """
 from random import randint
 from seerbit.client import Client
-from seerbit.enums import EnvironmentEnum, AuthTypeEnum
+from seerbit.enums import EnvironmentEnum
 from seerbit.seerbitlib import SeerBit
 from seerbit.service.authentication import Authentication
-from seerbit.service.card_service import CardService
+from seerbit.service.transfer_service import TransferService
 
 client = Client()
 
 
-def card_payment_refund(token_str: str):
-    """ Initiate Card Payment Refund """
-    print("================== start card payment refund ==================")
+def transfer(token_str: str):
+    """ Initiate Transfer """
+    print("================== start transfer ==================")
     random_number = randint(10000000, 99999999)
     payment_ref = "SBT_" + str(random_number)
-    card_payload = {
+    transfer_payload = {
         "paymentReference": payment_ref,
         "publicKey": client.public_key,
-        "currency": "KES",
-        "country": "KE",
-        "productDescription": "test refund",
-        "amount": "100.00"
+        "currency": "NGN",
+        "country": "NG",
+        "amount": "100.00",
+        "email": "johndoe@gmail.com",
+        "fullName": "john doe",
+        "paymentType": "TRANSFER",
+        "mobileNumber": "08087522256",
+        "callbackUrl": "http://checkout-seerbit.surge.sh",
+        "redirectUrl": "http://checkout-seerbit.surge.sh"
     }
-    card_service = CardService(client, token_str)
-    json_response = card_service.payment_refund(card_payload)
-    print("================== stop card payment refund ==================")
+    transfer_service = TransferService(client, token_str)
+    json_response = transfer_service.payment_transfer(transfer_payload)
+    print("================== stop transfer ==================")
     return json_response
 
 
@@ -48,11 +53,11 @@ client.environment = EnvironmentEnum.LIVE.value
 client.private_key = "private_key"
 client.public_key = "public_key"
 client.timeout = 20
-client.authentication_scheme = AuthTypeEnum.BASIC.value
 auth_service = Authentication(client)
-token = auth_service.get_basic_auth_encoded_string()
+auth_service.auth()
+token = auth_service.get_token()
 
 if token:
-    print("card refund payment response: " + str(card_payment_refund(token)))
+    print("transfer response: " + str(transfer(token)))
 else:
     print("authentication failure")

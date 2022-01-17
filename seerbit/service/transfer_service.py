@@ -16,13 +16,13 @@
  """
 from seerbit.client import Client
 from seerbit.interface.app_interface import IClientConstants
-from seerbit.interface.service_interface import IOrderService
+from seerbit.interface.service_interface import ITransferService
 from seerbit.service.servicelib import Service
-from seerbit.validation import OrderValidator
+from seerbit.validation import TransferValidator
 from seerbit.utility import Utility
 
 
-class OrderService(Service, IOrderService, IClientConstants):
+class TransferService(Service, ITransferService, IClientConstants):
 
     def __init__(self, client: Client, token: str):
         """
@@ -34,22 +34,22 @@ class OrderService(Service, IOrderService, IClientConstants):
             A non optional string, the auth token
 
         """
-        super(OrderService, self).__init__(client)
+        super(TransferService, self).__init__(client)
         self.token = token
         Utility.non_null(client)
 
-    def authorize(self, mobile_money: dict):
+    def payment_transfer(self, transfer):
         """
 
         POST /api/v2/payments/initiates
 
-        :param dict mobile_money:
+        :param dict ussd:
             A non optional dict, the payload
 
         :returns Any self.response
 
         """
         self.requires_token = True
-        OrderValidator.is_valid_authorize(schema=mobile_money)
-        self.response = self.post_request(IClientConstants.ORDERS_ENDPOINT, mobile_money, self.token)
+        TransferValidator.is_valid_payment_transfer(schema=transfer)
+        self.response = self.post_request(IClientConstants.INITIATE_PAYMENT_ENDPOINT, transfer, self.token)
         return self.response
