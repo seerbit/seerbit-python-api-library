@@ -5,7 +5,7 @@ with open("README.md", "r") as file:
 
 setuptools.setup(
     name="seerbit-python-v2",
-    version="1.0.2",
+    version="1.0.4",
     author="SeerBit",
     author_email="developers@seerbit.com",
     description="A SeerBit API Library for Python",
@@ -16,5 +16,5 @@ setuptools.setup(
     classifiers=[
         "Programming Language :: Python :: 3",
     ],
-    python_requires='>=3.7',
+    python_requires='>=3.9',
 )
