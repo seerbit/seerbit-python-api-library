@@ -15,6 +15,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  """
 from random import randint
+
 from seerbit.client import Client
 from seerbit.enums import EnvironmentEnum
 from seerbit.seerbitlib import SeerBit

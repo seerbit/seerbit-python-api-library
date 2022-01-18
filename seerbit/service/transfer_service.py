@@ -43,7 +43,7 @@ class TransferService(Service, ITransferService, IClientConstants):
 
         POST /api/v2/payments/initiates
 
-        :param dict ussd:
+        :param dict transfer:
             A non optional dict, the payload
 
         :returns Any self.response
