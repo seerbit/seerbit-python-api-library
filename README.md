@@ -1,6 +1,6 @@
 
 <div align="center">
- <img width="200" valign="top" src="https://res.cloudinary.com/dy2dagugp/image/upload/v1571249658/seerbit-logo_mdinom.png">
+ <img width="200" valign="top" src="https://res.cloudinary.com/dy2dagugp/image/upload/logo/seerbit.png">
 </div>
 
 
@@ -30,7 +30,7 @@ The documentation, installation guide, detailed description of the SeerBit API a
 
 ## Requirements
 
-* Python 3.7 
+* Python 3.9
 * Pip
 
 

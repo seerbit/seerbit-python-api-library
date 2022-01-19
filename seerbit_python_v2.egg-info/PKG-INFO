@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: seerbit-python-v2
-Version: 1.0.0
+Version: 1.0.4
 Summary: A SeerBit API Library for Python
 Home-page: https://github.com/seerbit/seerbit-python-api-library
 Author: SeerBit
@@ -38,7 +38,7 @@ Description:
         
         ## Requirements
         
-        * Python 3.7 
+        * Python 3.9
         * Pip
         
         
@@ -136,5 +136,5 @@ Description:
         
 Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3
-Requires-Python: >=3.7
+Requires-Python: >=3.9
 Description-Content-Type: text/markdown
