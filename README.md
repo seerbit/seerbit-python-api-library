@@ -1,6 +1,6 @@
 
 <div align="center">
- <img width="200" valign="top" src="https://res.cloudinary.com/dy2dagugp/image/upload/logo/seerbit.png">
+ <img width="200" valign="top" src="https://res.cloudinary.com/dy2dagugp/image/upload/logo/seerbit.png" width="30%" height="10%">
 </div>
 
 
