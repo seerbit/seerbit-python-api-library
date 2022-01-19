@@ -23,6 +23,8 @@ seerbit/service/resource_service.py
 seerbit/service/servicelib.py
 seerbit/service/standard_checkout_service.py
 seerbit/service/status_service.py
+seerbit/service/transfer_service.py
+seerbit/service/ussd_service.py
 seerbit_python_v2.egg-info/PKG-INFO
 seerbit_python_v2.egg-info/SOURCES.txt
 seerbit_python_v2.egg-info/dependency_links.txt
